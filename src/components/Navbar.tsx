@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { CategoryType } from '../types';
 import { CATEGORY_TABS } from '../data/products';
+import { BRAND_CONFIG } from '../data/constants';
 import { formatPKR } from '../utils/security';
 
 export const Navbar: React.FC = () => {
@@ -94,10 +95,15 @@ export const Navbar: React.FC = () => {
               <span>Salon Wholesale Inquiries</span>
             </a>
             <span className="text-zinc-600">|</span>
-            <div className="flex items-center gap-1 text-[#c5a880]">
+            <a
+              href={`https://wa.me/${BRAND_CONFIG.phoneRaw}`}
+              target="_blank"
+              rel="noreferrer"
+              className="flex items-center gap-1 text-[#c5a880] hover:underline"
+            >
               <PhoneCall className="w-3 h-3" />
-              <span>WhatsApp: 0300-AURA-VIP</span>
-            </div>
+              <span>WhatsApp: {BRAND_CONFIG.phoneDisplay}</span>
+            </a>
           </div>
         </div>
       </div>
@@ -121,19 +127,24 @@ export const Navbar: React.FC = () => {
               setSearchQuery('');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="cursor-pointer group flex flex-col items-center text-center select-none"
+            className="cursor-pointer group flex items-center gap-3 select-none"
           >
-            <div className="flex items-center gap-1.5">
+            <img
+              src={BRAND_CONFIG.logoUrl}
+              alt="The House of Aura Logo"
+              className="w-10 h-10 sm:w-12 sm:h-12 object-cover rounded-xl border border-[#c5a880]/40 shadow-lg group-hover:scale-105 transition-transform"
+            />
+            <div className="flex flex-col text-left">
               <span className="text-[10px] uppercase tracking-[0.35em] text-[#c5a880] font-semibold">
                 THE HOUSE OF
               </span>
+              <h1 className="text-xl sm:text-2xl font-bold tracking-[0.15em] text-white font-serif group-hover:text-[#e4cfb4] transition-colors leading-none my-0.5">
+                AURA
+              </h1>
+              <span className="text-[8.5px] uppercase tracking-[0.25em] text-zinc-400">
+                EST. {BRAND_CONFIG.estYear} • DUBAI
+              </span>
             </div>
-            <h1 className="text-2xl sm:text-3xl font-bold tracking-[0.15em] text-white font-serif group-hover:text-[#e4cfb4] transition-colors leading-none my-0.5">
-              AURA
-            </h1>
-            <span className="text-[9px] uppercase tracking-[0.25em] text-zinc-400">
-              DUBAI • PARIS • LAHORE
-            </span>
           </div>
 
           {/* Desktop Instant Search Bar */}

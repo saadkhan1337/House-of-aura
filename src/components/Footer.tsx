@@ -13,6 +13,8 @@ import {
   Heart
 } from 'lucide-react';
 
+import { BRAND_CONFIG } from '../data/constants';
+
 export const Footer: React.FC = () => {
   const { setSelectedCategory, setIsAuthModalOpen, setAuthModalTab } = useStore();
 
@@ -28,25 +30,32 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand Col */}
           <div className="space-y-3">
-            <div className="flex flex-col">
-              <span className="text-[10px] uppercase tracking-[0.35em] text-[#c5a880] font-bold">
-                THE HOUSE OF
-              </span>
-              <span className="text-2xl font-serif font-bold text-white tracking-[0.15em] my-0.5">
-                AURA
-              </span>
-              <span className="text-[9px] uppercase tracking-[0.2em] text-zinc-500">
-                DUBAI • PARIS • LAHORE
-              </span>
+            <div className="flex items-center gap-3">
+              <img
+                src={BRAND_CONFIG.logoUrl}
+                alt="House of Aura Emblem"
+                className="w-12 h-12 object-cover rounded-xl border border-[#c5a880]/40 shadow-lg"
+              />
+              <div className="flex flex-col">
+                <span className="text-[10px] uppercase tracking-[0.35em] text-[#c5a880] font-bold">
+                  THE HOUSE OF
+                </span>
+                <span className="text-2xl font-serif font-bold text-white tracking-[0.15em] my-0.5">
+                  AURA
+                </span>
+                <span className="text-[9px] uppercase tracking-[0.2em] text-zinc-500">
+                  EST. {BRAND_CONFIG.estYear} • DUBAI
+                </span>
+              </div>
             </div>
 
             <p className="text-xs text-zinc-400 leading-relaxed">
-              Pakistan's premier destination for genuine UAE imported hair color treatments, salon-grade restorative keratin systems, and authentic Arabian agarwood incense.
+              Pakistan's premier luxury destination for genuine UAE imported hair treatments, 96-hour clear water ammonia-free color kits, sulfate-free salon keratin systems, and authentic Arabian agarwood incense.
             </p>
 
             <div className="flex items-center gap-2 text-zinc-300">
               <ShieldCheck className="w-4 h-4 text-emerald-400" />
-              <span className="text-[11px] font-semibold">100% Genuine UAE Customs Clearances</span>
+              <span className="text-[11px] font-semibold">100% Genuine UAE Customs Clearance</span>
             </div>
           </div>
 
@@ -135,25 +144,45 @@ export const Footer: React.FC = () => {
             </h4>
             <div className="space-y-2 text-xs">
               <a
-                href="https://wa.me/923179738321"
+                href={`https://wa.me/${BRAND_CONFIG.phoneRaw}`}
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 text-emerald-400 hover:underline"
               >
                 <MessageCircle className="w-4 h-4 shrink-0" />
-                <span>WhatsApp: +92 317 9738321</span>
+                <span>WhatsApp: {BRAND_CONFIG.phoneDisplay}</span>
               </a>
 
               <div className="flex items-center gap-2 text-zinc-300">
                 <Mail className="w-4 h-4 text-[#c5a880] shrink-0" />
-                <span>concierge@thehouseofaura.com</span>
+                <span>{BRAND_CONFIG.email}</span>
+              </div>
+
+              <div className="flex items-center gap-3 pt-1 text-zinc-400">
+                <a
+                  href={BRAND_CONFIG.facebookUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  Facebook: {BRAND_CONFIG.facebookHandle}
+                </a>
+                <span>•</span>
+                <a
+                  href={BRAND_CONFIG.instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-pink-400 transition-colors"
+                >
+                  Instagram: {BRAND_CONFIG.instagramHandle}
+                </a>
               </div>
 
               <div className="flex items-start gap-2 text-zinc-400 pt-1">
                 <MapPin className="w-4 h-4 text-zinc-500 shrink-0 mt-0.5" />
                 <span>
-                  <strong>UAE Hub:</strong> Al Rigga, Deira, Dubai<br />
-                  <strong>PK Dispatch:</strong> Phase 6 DHA, Lahore
+                  <strong>UAE Hub:</strong> {BRAND_CONFIG.dubaiHub}<br />
+                  <strong>PK Dispatch:</strong> {BRAND_CONFIG.pakistanDispatch}
                 </span>
               </div>
 

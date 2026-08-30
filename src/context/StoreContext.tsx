@@ -253,6 +253,29 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     localStorage.setItem('hoa_addresses', JSON.stringify(savedAddresses));
   }, [savedAddresses]);
 
+  // Capture & Persist Organic Lead Attribution
+  useEffect(() => {
+    try {
+      const urlParams = new URLSearchParams(window.location.search);
+      const utmSource = urlParams.get('utm_source') || urlParams.get('ref') || urlParams.get('source');
+      const utmCampaign = urlParams.get('utm_campaign');
+      const utmMedium = urlParams.get('utm_medium');
+
+      if (utmSource) {
+        const attributionData = {
+          source: utmSource,
+          campaign: utmCampaign || 'Organic',
+          medium: utmMedium || 'social',
+          timestamp: new Date().toISOString()
+        };
+        sessionStorage.setItem('hoa_lead_attribution', JSON.stringify(attributionData));
+        localStorage.setItem('hoa_lead_attribution', JSON.stringify(attributionData));
+      }
+    } catch {
+      // safe fallback
+    }
+  }, []);
+
   // Toast Helper
   const showToast = (type: ToastMessage['type'], title: string, message?: string) => {
     const id = Math.random().toString(36).substring(2, 9);

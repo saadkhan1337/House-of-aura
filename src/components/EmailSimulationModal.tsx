@@ -193,7 +193,7 @@ export const EmailSimulationModal: React.FC = () => {
 
           {/* Email Footer */}
           <div className="text-center pt-6 border-t border-zinc-200 text-[11px] text-zinc-500 space-y-1">
-            <p>Need support with your shipment? Reply directly or WhatsApp VIP Concierge at +92 300 0000000</p>
+            <p>Need support with your shipment? Reply directly or WhatsApp VIP Concierge at +92 317 9738321</p>
             <p>© {new Date().getFullYear()} The House of Aura UAE & Pakistan. All Rights Reserved.</p>
           </div>
         </div>
