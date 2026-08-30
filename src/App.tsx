@@ -3,8 +3,7 @@ import { StoreProvider } from './context/StoreContext';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { TrustBanner } from './components/TrustBanner';
-import { FeaturedShowcase } from './components/FeaturedShowcase';
-import { ProductCatalog } from './components/ProductCatalog';
+import { VerticalProductShowcase } from './components/VerticalProductShowcase';
 import { ProductModal } from './components/ProductModal';
 import { CartDrawer } from './components/CartDrawer';
 import { AuthModal } from './components/AuthModal';
@@ -30,11 +29,8 @@ export default function App() {
         {/* 4 Security & Trust Badges Banner (SSL, Dubai Import, Open Parcel, Verified COD) */}
         <TrustBanner />
 
-        {/* Flagship Featured Products Showcase (Apple Hair Color, Cosmo Shampoo, Bakhoor Hamidi) */}
-        <FeaturedShowcase />
-
-        {/* Extensible Dynamic Catalog with Instant Search & Category Filters */}
-        <ProductCatalog />
+        {/* Flagship Vertical 3-Product Luxury Showcase */}
+        <VerticalProductShowcase />
 
         {/* Footer */}
         <Footer />
