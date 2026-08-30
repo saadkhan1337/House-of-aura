@@ -1,0 +1,6 @@
+{
+  "name": "The House of Aura",
+  "description": "Enterprise Luxury E-Commerce Platform for The House of Aura with dynamic catalog, authentication, order tracking, and Dubai imported hair care, fragrances, and cosmetics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
