@@ -18,10 +18,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 489,
     featured: true,
     featuredRank: 1,
-    image: '/images/apple_hair_color_3d.jpg',
+    image: '/images/apple_hair_color_3d_unified.jpg',
     galleryImages: [
-      '/images/apple_hair_color_3d.jpg',
-      '/images/apple_hair_color_jumbo.jpg'
+      '/images/apple_hair_color_3d_unified.jpg',
+      '/images/apple_hair_color_3d.jpg'
     ],
     varieties: [
       {
@@ -81,10 +81,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 374,
     featured: true,
     featuredRank: 2,
-    image: '/images/cosmo_keratin_shampoo_3d.jpg',
+    image: '/images/cosmo_keratin_shampoo_3d_unified.jpg',
     galleryImages: [
-      '/images/cosmo_keratin_shampoo_3d.jpg',
-      '/images/cosmo_keratin_shampoo_1000ml.jpg'
+      '/images/cosmo_keratin_shampoo_3d_unified.jpg',
+      '/images/cosmo_keratin_shampoo_3d.jpg'
     ],
     varieties: [
       {
@@ -127,10 +127,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 520,
     featured: true,
     featuredRank: 3,
-    image: '/images/bakhoor_hamidi_3d.jpg',
+    image: '/images/bakhoor_hamidi_3d_unified.jpg',
     galleryImages: [
-      '/images/bakhoor_hamidi_3d.jpg',
-      '/images/bakhoor_hamidi_8flavours.jpg'
+      '/images/bakhoor_hamidi_3d_unified.jpg',
+      '/images/bakhoor_hamidi_3d.jpg'
     ],
     varieties: [
       {

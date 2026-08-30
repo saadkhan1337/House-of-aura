@@ -92,7 +92,7 @@ export const HeroSection: React.FC = () => {
             <div className="relative mx-auto max-w-md rounded-3xl p-3 bg-gradient-to-tr from-[#2d2719] via-[#1a1b24] to-[#12131a] border border-[#c5a880]/40 shadow-2xl">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3] bg-black">
                 <img
-                  src="/images/apple_hair_color_3d.jpg"
+                  src="/images/apple_hair_color_3d_unified.jpg"
                   alt="Apple Ammonia-Free Hair Cream 500ml+500ml Jumbo Pack"
                   className="w-full h-full object-cover"
                 />
