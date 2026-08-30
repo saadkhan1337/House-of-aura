@@ -34,6 +34,11 @@ export const WhatsAppModal: React.FC = () => {
     const nameText = customerName.trim() ? customerName : 'Aura Customer';
     const cityText = customerCity.trim() ? customerCity : 'Pakistan';
 
+    // Capture Organic / Campaign Lead Attribution
+    const urlParams = new URLSearchParams(window.location.search);
+    const leadSource = urlParams.get('utm_source') || urlParams.get('ref') || urlParams.get('source') || 'Website Direct';
+    const campaignName = urlParams.get('utm_campaign') || 'Organic';
+
     const message = `*✨ THE HOUSE OF AURA - QUICK WHATSAPP ORDER*\n\n` +
       `*Product:* ${product.name}\n` +
       `*Selected Option:* ${variety.name}\n` +
@@ -41,11 +46,12 @@ export const WhatsAppModal: React.FC = () => {
       `*Total Price:* ${formatPKR(totalPrice)} (Cash on Delivery)\n\n` +
       `*Customer Details:*\n` +
       `• Name: ${nameText}\n` +
-      `• City: ${cityText}\n\n` +
+      `• City: ${cityText}\n` +
+      `• Lead Source: ${leadSource} (${campaignName})\n\n` +
       `Please confirm stock availability and dispatch with open parcel inspection!`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/923132541373?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/923179738321?text=${encodedMessage}`;
 
     window.open(whatsappUrl, '_blank');
     setWhatsAppModalItem(null);

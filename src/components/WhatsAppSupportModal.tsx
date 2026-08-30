@@ -25,15 +25,20 @@ export const WhatsAppSupportModal: React.FC<WhatsAppSupportModalProps> = ({
   const [customQuery, setCustomQuery] = useState('');
   const [isCopied, setIsCopied] = useState(false);
 
-  const whatsappNumber = '+92 313 2541373';
-  const whatsappClean = '923132541373';
+  const whatsappNumber = '+92 317 9738321';
+  const whatsappClean = '923179738321';
 
   // Build simulated WhatsApp message text
   const generateMessage = () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const leadSource = urlParams.get('utm_source') || urlParams.get('ref') || urlParams.get('source') || 'Direct';
+    const campaignName = urlParams.get('utm_campaign') || 'Organic';
+
     let msg = `*THE HOUSE OF AURA - DUBAI LUXURY ORDER CONCIERGE*\n`;
     if (customerName) msg += `Customer Name: ${customerName}\n`;
     if (city) msg += `City: ${city}\n`;
-    msg += `Inquiry Type: ${inquiryType.toUpperCase()}\n\n`;
+    msg += `Inquiry Type: ${inquiryType.toUpperCase()}\n`;
+    msg += `Lead Source: ${leadSource} (${campaignName})\n\n`;
 
     if (inquiryType === 'quick-order' && (cartItems?.length || 0) > 0) {
       msg += `*Selected Dubai Products:*\n`;

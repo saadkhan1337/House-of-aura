@@ -85,7 +85,7 @@ export const Navbar: React.FC = () => {
 
           <div className="hidden md:flex items-center gap-4 shrink-0 text-[11px] text-zinc-300">
             <a
-              href="https://wa.me/923132541373?text=Hi%20The%20House%20of%20Aura,%20I%20have%20a%20wholesale%20inquiry"
+              href="https://wa.me/923179738321?text=Hi%20The%20House%20of%20Aura,%20I%20have%20a%20wholesale%20inquiry"
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-1 hover:text-[#c5a880] transition-colors"
