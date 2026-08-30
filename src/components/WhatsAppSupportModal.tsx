@@ -25,8 +25,8 @@ export const WhatsAppSupportModal: React.FC<WhatsAppSupportModalProps> = ({
   const [customQuery, setCustomQuery] = useState('');
   const [isCopied, setIsCopied] = useState(false);
 
-  const whatsappNumber = '+92 321 8492000';
-  const whatsappClean = '923218492000';
+  const whatsappNumber = '+92 313 2541373';
+  const whatsappClean = '923132541373';
 
   // Build simulated WhatsApp message text
   const generateMessage = () => {

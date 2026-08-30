@@ -135,13 +135,13 @@ export const Footer: React.FC = () => {
             </h4>
             <div className="space-y-2 text-xs">
               <a
-                href="https://wa.me/923000000000"
+                href="https://wa.me/923132541373"
                 target="_blank"
                 rel="noreferrer"
                 className="flex items-center gap-2 text-emerald-400 hover:underline"
               >
                 <MessageCircle className="w-4 h-4 shrink-0" />
-                <span>WhatsApp: +92 300 0000000</span>
+                <span>WhatsApp: +92 313 2541373</span>
               </a>
 
               <div className="flex items-center gap-2 text-zinc-300">

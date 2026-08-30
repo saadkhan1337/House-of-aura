@@ -204,7 +204,7 @@ export const OrderSuccessModal: React.FC = () => {
           </button>
 
           <a
-            href={`https://wa.me/923000000000?text=Hi%20The%20House%20of%20Aura,%20I%20just%20placed%20order%20${order.id}%20for%20${encodeURIComponent(order.items[0]?.productName || '')}`}
+            href={`https://wa.me/923132541373?text=Hi%20The%20House%20of%20Aura,%20I%20just%20placed%20order%20${order.id}%20for%20${encodeURIComponent(order.items[0]?.productName || '')}`}
             target="_blank"
             rel="noreferrer"
             className="w-full sm:flex-1 py-3 bg-[#183926] hover:bg-[#204a32] border border-emerald-500/40 text-emerald-200 font-bold text-xs rounded-xl flex items-center justify-center gap-2 transition-colors"

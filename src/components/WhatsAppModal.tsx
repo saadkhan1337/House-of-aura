@@ -45,7 +45,7 @@ export const WhatsAppModal: React.FC = () => {
       `Please confirm stock availability and dispatch with open parcel inspection!`;
 
     const encodedMessage = encodeURIComponent(message);
-    const whatsappUrl = `https://wa.me/923000000000?text=${encodedMessage}`;
+    const whatsappUrl = `https://wa.me/923132541373?text=${encodedMessage}`;
 
     window.open(whatsappUrl, '_blank');
     setWhatsAppModalItem(null);

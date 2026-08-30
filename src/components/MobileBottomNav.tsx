@@ -91,7 +91,7 @@ export const MobileBottomNav: React.FC = () => {
 
         {/* WhatsApp VIP */}
         <a
-          href="https://wa.me/923000000000?text=Hi%20The%20House%20of%20Aura,%20I%20need%20assistance%20with%20an%20order."
+          href="https://wa.me/923132541373?text=Hi%20The%20House%20of%20Aura,%20I%20need%20assistance%20with%20an%20order."
           target="_blank"
           rel="noreferrer"
           className="flex flex-col items-center justify-center p-1 text-emerald-400 hover:text-emerald-300 transition-colors"
