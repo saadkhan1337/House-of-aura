@@ -3,7 +3,7 @@ import { StoreProvider } from './context/StoreContext';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
 import { TrustBanner } from './components/TrustBanner';
-import { VerticalProductShowcase } from './components/VerticalProductShowcase';
+import { SplitScreenStudioShowcase } from './components/SplitScreenStudioShowcase';
 import { ProductModal } from './components/ProductModal';
 import { CartDrawer } from './components/CartDrawer';
 import { AuthModal } from './components/AuthModal';
@@ -29,8 +29,8 @@ export default function App() {
         {/* 4 Security & Trust Badges Banner (SSL, Dubai Import, Open Parcel, Verified COD) */}
         <TrustBanner />
 
-        {/* Flagship Vertical 3-Product Luxury Showcase */}
-        <VerticalProductShowcase />
+        {/* Flagship Split-Screen Studio Showcase: Left Dynamic Stage | Right 3-Product Menu */}
+        <SplitScreenStudioShowcase />
 
         {/* Footer */}
         <Footer />

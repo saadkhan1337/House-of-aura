@@ -72,7 +72,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     displayCategoryTab: ['All', 'Hair Care'],
     description: 'Imported from UAE, Cosmo Keratin Shampoo is enriched with hydrolyzed keratin protein and vital botanical extracts. Specially designed to eliminate frizz, restore split ends, strengthen follicles against breakage, and keep hair silky straight for 72 hours.',
     usp: [
-      '1000ml Jumbo Professional Salon Dispenser Pump',
+      '480ml Professional Salon Dispenser Pump Bottle',
       '100% Sulfate & Paraben Free Formula',
       'Anti-Hair Fall & Active Keratin Moisture Lock',
       'Delivers Straight, Glossy & Silky Smooth Texture'
@@ -81,20 +81,20 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 374,
     featured: true,
     featuredRank: 2,
-    image: '/images/cosmo_keratin_shampoo_3d_unified.jpg',
+    image: '/images/studio_variants/studio_cosmo_480ml_single.jpg',
     galleryImages: [
-      '/images/cosmo_keratin_shampoo_3d_unified.jpg',
+      '/images/studio_variants/studio_cosmo_480ml_single.jpg',
       '/images/cosmo_keratin_shampoo_3d.jpg'
     ],
     varieties: [
       {
-        id: 'var-cosmo-1000ml',
-        name: '1000ml Jumbo Salon Dispenser Bottle',
+        id: 'var-cosmo-480ml',
+        name: '480ml Salon Dispenser Bottle',
         type: 'size',
         hexColor: '#d4af37',
         inStock: true,
         stockQty: 95,
-        badge: 'Jumbo Size'
+        badge: 'Salon Size'
       }
     ],
     pricing: {
@@ -104,9 +104,9 @@ export const INITIAL_PRODUCTS: Product[] = [
       wholesalePrice: 1450,
       minWholesaleQty: 6
     },
-    tags: ['Azaadi Sale 59% OFF', '1000ml Jumbo Size', 'Sulfate Free', 'Anti-Hair Fall'],
+    tags: ['Azaadi Sale 59% OFF', '480ml Salon Bottle', 'Sulfate Free', 'Anti-Hair Fall'],
     origin: 'Sharjah Free Zone, UAE',
-    volumeOrWeight: '1000ml (1 Litre) Jumbo Pump Bottle',
+    volumeOrWeight: '480ml Salon Pump Bottle',
     howToUse: 'Pump generous amount into hands, massage deeply into scalp and wet hair for 2-3 minutes to activate keratin therapy, then rinse with cool water.',
     ingredients: 'Aqua, Hydrolyzed Keratin Protein, Biotin, Argania Spinosa Kernel Oil, Panthenol (Pro-Vitamin B5), Citric Acid, Natural Essential Oils.'
   },
