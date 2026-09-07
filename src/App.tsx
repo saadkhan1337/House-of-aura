@@ -2,8 +2,9 @@ import React from 'react';
 import { StoreProvider } from './context/StoreContext';
 import { Navbar } from './components/Navbar';
 import { HeroSection } from './components/HeroSection';
+import { CleanProductShowcase } from './components/CleanProductShowcase';
+import { CustomerReviews } from './components/CustomerReviews';
 import { TrustBanner } from './components/TrustBanner';
-import { SplitScreenStudioShowcase } from './components/SplitScreenStudioShowcase';
 import { ProductModal } from './components/ProductModal';
 import { CartDrawer } from './components/CartDrawer';
 import { AuthModal } from './components/AuthModal';
@@ -23,14 +24,17 @@ export default function App() {
         {/* Main Header & Announcement */}
         <Navbar />
 
-        {/* Hero Banner with UAE direct import aesthetics */}
+        {/* Clean Luxury Hero Section */}
         <HeroSection />
 
-        {/* 4 Security & Trust Badges Banner (SSL, Dubai Import, Open Parcel, Verified COD) */}
-        <TrustBanner />
+        {/* Core Product Showcase: The 4 Dubai Essentials */}
+        <CleanProductShowcase />
 
-        {/* Flagship Split-Screen Studio Showcase: Left Dynamic Stage | Right 3-Product Menu */}
-        <SplitScreenStudioShowcase />
+        {/* Customer Reviews & Experiences across Pakistan */}
+        <CustomerReviews />
+
+        {/* Security & Trust Badges Banner (SSL, Dubai Genuine, Open Parcel, Verified COD) - MOVED TO BOTTOM */}
+        <TrustBanner />
 
         {/* Footer */}
         <Footer />
@@ -38,7 +42,7 @@ export default function App() {
         {/* Sticky Mobile Bottom Navigation */}
         <MobileBottomNav />
 
-        {/* Modals & Overlays */}
+        {/* Modals & Overlays for complete order flow */}
         <ProductModal />
         <CartDrawer />
         <AuthModal />

@@ -54,16 +54,28 @@ export const TrustBanner: React.FC = () => {
 
   return (
     <>
-      <section className="bg-[#121318] border-y border-[#262730] py-6 px-4">
+      <section className="bg-[#0f1016] border-y border-[#262730] py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+          <div className="text-center max-w-xl mx-auto mb-8">
+            <span className="text-xs uppercase tracking-widest text-[#c5a880] font-semibold block mb-1">
+              Guaranteed Reliability
+            </span>
+            <h3 className="text-xl sm:text-2xl font-serif font-bold text-white">
+              Why Pakistan Trusts The House of Aura
+            </h3>
+            <p className="text-xs text-zinc-400 mt-1 font-light">
+              Click any badge to view our security protocols and customer protection policies.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
             {badges.map((badge, idx) => {
               const Icon = badge.icon;
               return (
                 <button
                   key={badge.id}
                   onClick={() => setSelectedBadge(idx)}
-                  className="flex items-start gap-3 p-3.5 rounded-xl bg-[#181920]/80 hover:bg-[#20222a] border border-[#2b2c36] hover:border-[#c5a880]/50 transition-all text-left group cursor-pointer"
+                  className="flex items-start gap-3 p-4 rounded-xl bg-[#161720]/80 hover:bg-[#1e202a] border border-[#2b2c36] hover:border-[#c5a880]/50 transition-all text-left group cursor-pointer"
                 >
                   <div className="p-2.5 rounded-lg bg-[#0e0f14] border border-[#2d2e3b] text-[#c5a880] group-hover:scale-105 group-hover:text-amber-300 transition-transform shrink-0">
                     <Icon className="w-5 h-5" />
@@ -75,7 +87,7 @@ export const TrustBanner: React.FC = () => {
                     <h4 className="text-xs md:text-sm font-semibold text-zinc-100 group-hover:text-white leading-tight">
                       {badge.title}
                     </h4>
-                    <p className="text-[11px] text-zinc-400 mt-0.5 hidden sm:block">
+                    <p className="text-[11px] text-zinc-400 mt-0.5">
                       {badge.subtitle}
                     </p>
                   </div>
@@ -98,7 +110,7 @@ export const TrustBanner: React.FC = () => {
             >
               <button
                 onClick={() => setSelectedBadge(null)}
-                className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors"
+                className="absolute top-4 right-4 p-2 text-zinc-400 hover:text-white rounded-lg hover:bg-zinc-800 transition-colors cursor-pointer"
                 aria-label="Close dialog"
               >
                 <X className="w-5 h-5" />
@@ -118,18 +130,22 @@ export const TrustBanner: React.FC = () => {
                 </div>
               </div>
 
-              <p className="text-sm text-zinc-300 leading-relaxed mb-6">
+              <p className="text-sm text-zinc-300 leading-relaxed mb-6 font-light">
                 {badges[selectedBadge].description}
               </p>
 
-              <div className="bg-[#0f1015] rounded-xl p-4 border border-zinc-800 space-y-2 mb-6 text-xs text-zinc-300">
+              <div className="bg-[#0f1015] rounded-xl p-4 border border-zinc-800 space-y-2.5 mb-6 text-xs text-zinc-300">
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#c5a880] shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span>Real-time courier API sync with automated tracking SMS</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#c5a880] shrink-0" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
                   <span>Verified Dubai origin declaration on customs manifest</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <span>Open Parcel Guarantee — inspect in front of courier rider</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 text-[#c5a880] shrink-0" />
@@ -139,9 +155,9 @@ export const TrustBanner: React.FC = () => {
 
               <button
                 onClick={() => setSelectedBadge(null)}
-                className="w-full py-3 bg-[#c5a880] hover:bg-[#d6ba92] text-[#0c0d10] font-bold text-sm rounded-xl transition-colors"
+                className="w-full py-3 bg-[#c5a880] hover:bg-[#d6ba92] text-[#0c0d10] font-bold text-sm rounded-xl transition-colors cursor-pointer"
               >
-                Understood & Close
+                Understood &amp; Close
               </button>
             </motion.div>
           </div>
