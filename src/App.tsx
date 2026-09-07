@@ -1,9 +1,7 @@
 import React from 'react';
 import { StoreProvider } from './context/StoreContext';
 import { Navbar } from './components/Navbar';
-import { HeroSection } from './components/HeroSection';
-import { CleanProductShowcase } from './components/CleanProductShowcase';
-import { CustomerReviews } from './components/CustomerReviews';
+import { SplitScreenStudioShowcase } from './components/SplitScreenStudioShowcase';
 import { TrustBanner } from './components/TrustBanner';
 import { ProductModal } from './components/ProductModal';
 import { CartDrawer } from './components/CartDrawer';
@@ -24,16 +22,10 @@ export default function App() {
         {/* Main Header & Announcement */}
         <Navbar />
 
-        {/* Clean Luxury Hero Section */}
-        <HeroSection />
+        {/* Dubai Flagship Studio Showcase: 4 Products Split-Screen Layout */}
+        <SplitScreenStudioShowcase />
 
-        {/* Core Product Showcase: The 4 Dubai Essentials */}
-        <CleanProductShowcase />
-
-        {/* Customer Reviews & Experiences across Pakistan */}
-        <CustomerReviews />
-
-        {/* Security & Trust Badges Banner (SSL, Dubai Genuine, Open Parcel, Verified COD) - MOVED TO BOTTOM */}
+        {/* Security & Trust Badges Banner */}
         <TrustBanner />
 
         {/* Footer */}

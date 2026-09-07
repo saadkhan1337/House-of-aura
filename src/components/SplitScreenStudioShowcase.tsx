@@ -5,24 +5,19 @@ import { formatPKR } from '../utils/security';
 import {
   Sparkles,
   ShoppingBag,
-  Heart,
   Check,
-  Star,
   ShieldCheck,
-  Zap,
   MessageCircle,
   Truck,
-  Eye,
   Clock,
-  Droplets,
   Flame,
   Award,
-  Layers,
-  ChevronRight
+  ChevronRight,
+  Zap
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 
-type ProductTabKey = 'apple' | 'cosmo' | 'bakhoor';
+type ProductTabKey = 'apple' | 'cosmo' | 'bakhoor' | 'dexe';
 
 interface BakhoorScentConfig {
   id: string;
@@ -62,6 +57,9 @@ export const SplitScreenStudioShowcase: React.FC = () => {
   const [selectedScentId, setSelectedScentId] = useState('black_oud');
   const [bakhoorDeal, setBakhoorDeal] = useState<'single' | 'duo' | 'trio' | 'set8'>('single');
 
+  // Dexe Hair Color Shampoo State (400ml)
+  const [dexeDeal, setDexeDeal] = useState<'single' | 'duo'>('single');
+
   // Direct WhatsApp Checkout Helper
   const handleWhatsAppCheckout = (title: string, spec: string, price: number) => {
     const phone = BRAND_CONFIG.supportPhone;
@@ -71,22 +69,60 @@ export const SplitScreenStudioShowcase: React.FC = () => {
     window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
   };
 
-  // Compute Active Product Data
+  // Compute Active Product Data safely
   const appleProduct = products.find((p) => p.id === 'apple-ammonia-free-hair-cream') || products[0];
   const cosmoProduct = products.find((p) => p.id === 'hoa-cosmo-keratin-shampoo-1000ml') || products[1];
   const bakhoorProduct = products.find((p) => p.id === 'hoa-bakhoor-hamidi') || products[2];
+  const dexeProduct = products.find((p) => p.id === 'hoa-dexe-black-hair-shampoo') || products[3] || products[0];
 
   const currentBakhoorScent = BAKHOOR_SCENTS.find((s) => s.id === selectedScentId) || BAKHOOR_SCENTS[0];
 
   return (
-    <section className="py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <section className="py-8 sm:py-10 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       {/* ───────────────────────────────────────────────────────────────── */}
-      {/* MOBILE TOP TAB SWITCHER (Thumb-friendly on mobile screens)       */}
+      {/* LUXURY WELCOME GREETING & TRUST HEADER                            */}
+      {/* ───────────────────────────────────────────────────────────────── */}
+      <div className="mb-8 p-5 sm:p-7 rounded-3xl bg-gradient-to-r from-[#12131b] via-[#181924] to-[#12131b] border border-[#272838] shadow-2xl relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-5">
+        <div className="relative z-10 space-y-1.5">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c5a880]/15 text-[#c5a880] text-xs font-bold uppercase tracking-wider border border-[#c5a880]/30">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Direct UAE Luxury Imports</span>
+          </div>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-serif font-bold text-white tracking-wide">
+            THE HOUSE OF AURA
+          </h2>
+          <p className="text-sm font-serif italic text-[#c5a880]">
+            Beauty, Care & Arabian Luxury
+          </p>
+          <p className="text-xs sm:text-sm text-zinc-300 max-w-2xl leading-relaxed pt-1">
+            Curated salon hair essentials and authentic Emirati fragrances, brought to you directly from Dubai. Pure ingredients, zero compromise.
+          </p>
+        </div>
+
+        <div className="relative z-10 flex flex-wrap items-center gap-3 shrink-0">
+          <a
+            href="https://wa.me/923179738321?text=Assalam%20o%20Alaikum!%20I%20want%20to%20inquire%20about%20The%20House%20of%20Aura%20products."
+            target="_blank"
+            rel="noreferrer"
+            className="px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 text-white font-bold text-xs shadow-lg flex items-center gap-2 transition-all hover:scale-[1.02]"
+          >
+            <MessageCircle className="w-4 h-4 fill-white" />
+            <span>WhatsApp Us (0317-9738321)</span>
+          </a>
+          <div className="hidden sm:flex items-center gap-2 px-4 py-3 rounded-xl bg-[#0d0e14]/90 border border-[#2c2d3c] text-xs text-zinc-300">
+            <ShieldCheck className="w-4 h-4 text-emerald-400" />
+            <span>Open Parcel on Delivery</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ───────────────────────────────────────────────────────────────── */}
+      {/* MOBILE TOP TAB SWITCHER (4 Products)                             */}
       {/* ───────────────────────────────────────────────────────────────── */}
       <div className="lg:hidden flex items-center gap-2 mb-6 overflow-x-auto pb-2 scrollbar-none">
         <button
           onClick={() => setActiveTab('apple')}
-          className={`flex-1 min-w-[130px] py-2.5 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+          className={`flex-1 min-w-[120px] py-2.5 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
             activeTab === 'apple'
               ? 'border-emerald-500 bg-emerald-500/20 text-emerald-300'
               : 'border-[#262734] bg-[#12131b] text-zinc-400'
@@ -98,7 +134,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
 
         <button
           onClick={() => setActiveTab('cosmo')}
-          className={`flex-1 min-w-[130px] py-2.5 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+          className={`flex-1 min-w-[120px] py-2.5 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
             activeTab === 'cosmo'
               ? 'border-amber-500 bg-amber-500/20 text-amber-300'
               : 'border-[#262734] bg-[#12131b] text-zinc-400'
@@ -110,7 +146,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
 
         <button
           onClick={() => setActiveTab('bakhoor')}
-          className={`flex-1 min-w-[130px] py-2.5 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+          className={`flex-1 min-w-[120px] py-2.5 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
             activeTab === 'bakhoor'
               ? 'border-[#c5a880] bg-[#c5a880]/20 text-[#c5a880]'
               : 'border-[#262734] bg-[#12131b] text-zinc-400'
@@ -119,10 +155,22 @@ export const SplitScreenStudioShowcase: React.FC = () => {
           <span>🪵</span>
           <span>Bakhoor 8-Set</span>
         </button>
+
+        <button
+          onClick={() => setActiveTab('dexe')}
+          className={`flex-1 min-w-[120px] py-2.5 px-3 rounded-xl border text-xs font-bold transition-all flex items-center justify-center gap-1.5 ${
+            activeTab === 'dexe'
+              ? 'border-teal-500 bg-teal-500/20 text-teal-300'
+              : 'border-[#262734] bg-[#12131b] text-zinc-400'
+          }`}
+        >
+          <span>🌿</span>
+          <span>Dexe 400ml</span>
+        </button>
       </div>
 
       {/* ───────────────────────────────────────────────────────────────── */}
-      {/* MAIN SPLIT-SCREEN CONSOLE: LEFT STAGE | RIGHT 3-PRODUCT MENU     */}
+      {/* MAIN SPLIT-SCREEN CONSOLE: LEFT STAGE | RIGHT 4-PRODUCT MENU     */}
       {/* ───────────────────────────────────────────────────────────────── */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* ═══════════════════════════════════════════════════════════════ */}
@@ -264,7 +312,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                           Save Rs. 500
                         </span>
                         <div className="text-[11px] text-emerald-400">Pack of 2 Deal</div>
-                        <div className="text-base font-bold text-white">{formatPKR(4500)}</div>
+                        <div className="text-base font-bold text-white">{formatPKR(4499)}</div>
                       </button>
                     </div>
                   </div>
@@ -276,10 +324,10 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                         handleWhatsAppCheckout(
                           'Apple Ammonia-Free Hair Cream (500ml+500ml)',
                           `${appleDeal === 'single' ? 'Single Pack' : 'Pack of 2 Duo'} [Shade: ${appleShade}]`,
-                          appleDeal === 'single' ? 2499 : 4500
+                          appleDeal === 'single' ? 2499 : 4499
                         )
                       }
-                      className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2"
+                      className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                     >
                       <MessageCircle className="w-4 h-4 fill-white" />
                       <span>Order on WhatsApp (COD)</span>
@@ -289,7 +337,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                         addToCart(appleProduct, appleProduct.varieties[0], appleDeal === 'single' ? 1 : 2);
                         showToast('success', 'Added to Bag!', `${appleProduct.name}`);
                       }}
-                      className="py-3 px-4 rounded-xl bg-[#c5a880] hover:bg-[#d6ba94] text-[#0c0d12] font-bold text-xs flex items-center justify-center gap-1.5"
+                      className="py-3 px-4 rounded-xl bg-[#c5a880] hover:bg-[#d6ba94] text-[#0c0d12] font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <ShoppingBag className="w-4 h-4" />
                       <span>Add to Bag</span>
@@ -391,7 +439,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                           cosmoDeal === 'single' ? 1970 : 3000
                         )
                       }
-                      className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2"
+                      className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                     >
                       <MessageCircle className="w-4 h-4 fill-white" />
                       <span>Order on WhatsApp (COD)</span>
@@ -401,7 +449,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                         addToCart(cosmoProduct, cosmoProduct.varieties[0], cosmoDeal === 'single' ? 1 : 2);
                         showToast('success', 'Added to Bag!', `${cosmoProduct.name}`);
                       }}
-                      className="py-3 px-4 rounded-xl bg-[#c5a880] hover:bg-[#d6ba94] text-[#0c0d12] font-bold text-xs flex items-center justify-center gap-1.5"
+                      className="py-3 px-4 rounded-xl bg-[#c5a880] hover:bg-[#d6ba94] text-[#0c0d12] font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <ShoppingBag className="w-4 h-4" />
                       <span>Add to Bag</span>
@@ -459,7 +507,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                     </p>
                   </div>
 
-                  {/* Scent Selector (Changes the picture instantly on click!) */}
+                  {/* Scent Selector */}
                   <div>
                     <label className="block text-[11px] font-bold text-zinc-400 uppercase mb-2">
                       Select Arabian Scent ({currentBakhoorScent.shortName}):
@@ -474,7 +522,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                               setSelectedScentId(s.id);
                               if (bakhoorDeal === 'set8') setBakhoorDeal('single');
                             }}
-                            className={`py-1.5 px-2 rounded-lg border text-center text-[10px] font-bold transition-all truncate ${
+                            className={`py-1.5 px-2 rounded-lg border text-center text-[10px] font-bold transition-all truncate cursor-pointer ${
                               isSelected
                                 ? 'border-[#c5a880] bg-[#c5a880]/25 text-white shadow'
                                 : 'border-[#262734] bg-[#14151e] text-zinc-400 hover:text-white'
@@ -495,7 +543,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                     <div className="grid grid-cols-4 gap-2">
                       <button
                         onClick={() => setBakhoorDeal('single')}
-                        className={`p-2 rounded-xl border text-left transition-all ${
+                        className={`p-2 rounded-xl border text-left transition-all cursor-pointer ${
                           bakhoorDeal === 'single'
                             ? 'border-[#c5a880] bg-[#c5a880]/15 ring-1 ring-[#c5a880]'
                             : 'border-[#262734] bg-[#14151e]'
@@ -507,7 +555,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
 
                       <button
                         onClick={() => setBakhoorDeal('duo')}
-                        className={`p-2 rounded-xl border text-left transition-all ${
+                        className={`p-2 rounded-xl border text-left transition-all cursor-pointer ${
                           bakhoorDeal === 'duo'
                             ? 'border-[#c5a880] bg-[#c5a880]/15 ring-1 ring-[#c5a880]'
                             : 'border-[#262734] bg-[#14151e]'
@@ -519,7 +567,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
 
                       <button
                         onClick={() => setBakhoorDeal('trio')}
-                        className={`p-2 rounded-xl border text-left transition-all ${
+                        className={`p-2 rounded-xl border text-left transition-all cursor-pointer ${
                           bakhoorDeal === 'trio'
                             ? 'border-emerald-500 bg-emerald-500/15 ring-1 ring-emerald-500'
                             : 'border-[#262734] bg-[#14151e]'
@@ -531,7 +579,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
 
                       <button
                         onClick={() => setBakhoorDeal('set8')}
-                        className={`p-2 rounded-xl border text-left transition-all ${
+                        className={`p-2 rounded-xl border text-left transition-all cursor-pointer ${
                           bakhoorDeal === 'set8'
                             ? 'border-amber-500 bg-amber-500/20 ring-1 ring-amber-500'
                             : 'border-[#262734] bg-[#14151e]'
@@ -561,7 +609,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                         }
                         handleWhatsAppCheckout('Bakhoor Hamidi (Arabian Scent)', dealName, price);
                       }}
-                      className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2"
+                      className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer"
                     >
                       <MessageCircle className="w-4 h-4 fill-white" />
                       <span>Order on WhatsApp (COD)</span>
@@ -572,7 +620,131 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                         addToCart(bakhoorProduct, bakhoorProduct.varieties[0], qty);
                         showToast('success', 'Added to Bag!', `${bakhoorProduct.name}`);
                       }}
-                      className="py-3 px-4 rounded-xl bg-[#c5a880] hover:bg-[#d6ba94] text-[#0c0d12] font-bold text-xs flex items-center justify-center gap-1.5"
+                      className="py-3 px-4 rounded-xl bg-[#c5a880] hover:bg-[#d6ba94] text-[#0c0d12] font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer"
+                    >
+                      <ShoppingBag className="w-4 h-4" />
+                      <span>Add to Bag</span>
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {/* 🌿 PRODUCT 4: DEXE BLACK HAIR SHAMPOO 400ml */}
+            {activeTab === 'dexe' && (
+              <motion.div
+                key="dexe-stage"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3 }}
+                className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
+              >
+                <div className="md:col-span-6 space-y-4">
+                  <div className="relative rounded-2xl overflow-hidden aspect-square bg-[#161722] border border-[#2e3042] shadow-xl group">
+                    <img
+                      src="/images/dexe_black_hair_shampoo.jpg"
+                      alt="Dexe Black Hair Color Shampoo 400ml"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-3 left-3 bg-black/80 backdrop-blur-md px-3 py-1 rounded-full border border-teal-500/40 text-[11px] font-bold text-teal-300 flex items-center gap-1.5">
+                      <Zap className="w-3.5 h-3.5" />
+                      <span>5-Minute Express Coverage</span>
+                    </div>
+                    <div className="absolute bottom-3 left-3 right-3 bg-[#13141d]/90 backdrop-blur-md px-3.5 py-2.5 rounded-xl border border-[#343648] flex items-center justify-between">
+                      <span className="text-xs font-bold text-white">400ml Salon Pump Bottle</span>
+                      <span className="text-[11px] font-bold text-teal-400">100% Ammonia-Free</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="md:col-span-6 space-y-5">
+                  <div>
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-teal-500/15 text-teal-400 text-[11px] font-bold uppercase border border-teal-500/30 mb-2">
+                      <Sparkles className="w-3 h-3" />
+                      <span>Instant Fast Dye • 5 Minutes</span>
+                    </div>
+                    <h3 className="text-2xl sm:text-3xl font-serif font-bold text-white">
+                      Dexe Black Hair Color Shampoo (400ml)
+                    </h3>
+                    <p className="text-xs text-[#c5a880] mt-1 font-medium">
+                      400ml Jumbo Salon Dispenser • Herbal Ginseng & Argan Formula
+                    </p>
+                  </div>
+
+                  <p className="text-xs text-zinc-300 leading-relaxed">
+                    World-renowned herbal hair darkening shampoo. Infused with Chinese ginseng, black sesame, and argan oil to nourish scalp while restoring rich natural black in just 5 minutes with zero skin stains.
+                  </p>
+
+                  {/* Shade Selection */}
+                  <div>
+                    <label className="block text-[11px] font-bold text-zinc-400 uppercase mb-2">
+                      Select Hair Shade:
+                    </label>
+                    <div className="p-2.5 rounded-lg border border-[#c5a880] bg-[#c5a880]/20 text-white text-xs font-bold flex items-center justify-between">
+                      <span>1.0 Natural Black</span>
+                      <span className="text-[11px] text-[#c5a880] font-normal">Rich Salon Black • 100% Coverage</span>
+                    </div>
+                  </div>
+
+                  {/* Deal Selector */}
+                  <div>
+                    <label className="block text-[11px] font-bold text-zinc-400 uppercase mb-2">
+                      Choose Deal Pack:
+                    </label>
+                    <div className="grid grid-cols-2 gap-2.5">
+                      <button
+                        onClick={() => setDexeDeal('single')}
+                        className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
+                          dexeDeal === 'single'
+                            ? 'border-[#c5a880] bg-[#c5a880]/15 ring-1 ring-[#c5a880]'
+                            : 'border-[#262734] bg-[#14151e]'
+                        }`}
+                      >
+                        <div className="text-[11px] text-zinc-400">Single 400ml Bottle</div>
+                        <div className="text-base font-bold text-white">{formatPKR(1850)}</div>
+                        <div className="text-[10px] text-zinc-500 line-through">Rs. 3,200</div>
+                      </button>
+
+                      <button
+                        onClick={() => setDexeDeal('duo')}
+                        className={`p-3 rounded-xl border text-left transition-all relative cursor-pointer ${
+                          dexeDeal === 'duo'
+                            ? 'border-teal-500 bg-teal-500/15 ring-1 ring-teal-500'
+                            : 'border-[#262734] bg-[#14151e]'
+                        }`}
+                      >
+                        <span className="absolute -top-2 right-2 px-1.5 py-0.5 rounded bg-teal-500 text-black text-[9px] font-black uppercase">
+                          Save Rs. 500
+                        </span>
+                        <div className="text-[11px] text-teal-400">Pack of 2 Deal</div>
+                        <div className="text-base font-bold text-white">{formatPKR(3200)}</div>
+                        <div className="text-[10px] text-teal-300">Rs. 1,600 / bottle</div>
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* CTAs */}
+                  <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
+                    <button
+                      onClick={() =>
+                        handleWhatsAppCheckout(
+                          'Dexe Black Hair Color Shampoo (400ml)',
+                          dexeDeal === 'single' ? 'Single 400ml Bottle' : 'Pack of 2 Bottles Deal (800ml)',
+                          dexeDeal === 'single' ? 1850 : 3200
+                        )
+                      }
+                      className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 text-white font-bold text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+                    >
+                      <MessageCircle className="w-4 h-4 fill-white" />
+                      <span>Order on WhatsApp (COD)</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        addToCart(dexeProduct, dexeProduct.varieties[0], dexeDeal === 'single' ? 1 : 2);
+                        showToast('success', 'Added to Bag!', `${dexeProduct.name}`);
+                      }}
+                      className="py-3 px-4 rounded-xl bg-[#c5a880] hover:bg-[#d6ba94] text-[#0c0d12] font-bold text-xs flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <ShoppingBag className="w-4 h-4" />
                       <span>Add to Bag</span>
@@ -585,7 +757,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
         </div>
 
         {/* ═══════════════════════════════════════════════════════════════ */}
-        {/* RIGHT SIDE (4 COLS): 3-PRODUCT SELECTOR MENU                   */}
+        {/* RIGHT SIDE (4 COLS): 4-PRODUCT SELECTOR MENU                   */}
         {/* ═══════════════════════════════════════════════════════════════ */}
         <div className="lg:col-span-4 space-y-4">
           <div className="px-2">
@@ -600,7 +772,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
           {/* 🍏 Product 1 Card */}
           <button
             onClick={() => setActiveTab('apple')}
-            className={`w-full p-4 rounded-2xl border text-left transition-all relative flex items-center gap-4 group ${
+            className={`w-full p-4 rounded-2xl border text-left transition-all relative flex items-center gap-4 group cursor-pointer ${
               activeTab === 'apple'
                 ? 'border-emerald-500 bg-[#161724] ring-1 ring-emerald-500 shadow-xl'
                 : 'border-[#242533] bg-[#101118] hover:border-zinc-500'
@@ -628,7 +800,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
           {/* 🧴 Product 2 Card */}
           <button
             onClick={() => setActiveTab('cosmo')}
-            className={`w-full p-4 rounded-2xl border text-left transition-all relative flex items-center gap-4 group ${
+            className={`w-full p-4 rounded-2xl border text-left transition-all relative flex items-center gap-4 group cursor-pointer ${
               activeTab === 'cosmo'
                 ? 'border-amber-500 bg-[#161724] ring-1 ring-amber-500 shadow-xl'
                 : 'border-[#242533] bg-[#101118] hover:border-zinc-500'
@@ -655,7 +827,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
           {/* 🪵 Product 3 Card */}
           <button
             onClick={() => setActiveTab('bakhoor')}
-            className={`w-full p-4 rounded-2xl border text-left transition-all relative flex items-center gap-4 group ${
+            className={`w-full p-4 rounded-2xl border text-left transition-all relative flex items-center gap-4 group cursor-pointer ${
               activeTab === 'bakhoor'
                 ? 'border-[#c5a880] bg-[#161724] ring-1 ring-[#c5a880] shadow-xl'
                 : 'border-[#242533] bg-[#101118] hover:border-zinc-500'
@@ -663,7 +835,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
           >
             <div className="w-16 h-16 rounded-xl overflow-hidden bg-black/50 border border-white/10 shrink-0">
               <img
-                src="/images/studio_variants/studio_bakhoor_black_oud.jpg"
+                src="/images/studio_variants/bakhoor_black_oud.jpg"
                 alt="Bakhoor Hamidi"
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform"
               />
@@ -677,6 +849,33 @@ export const SplitScreenStudioShowcase: React.FC = () => {
               <div className="text-xs font-bold text-[#c5a880] mt-1">From {formatPKR(1999)}</div>
             </div>
             <ChevronRight className={`w-4 h-4 transition-transform ${activeTab === 'bakhoor' ? 'text-[#c5a880] translate-x-1' : 'text-zinc-600'}`} />
+          </button>
+
+          {/* 🌿 Product 4 Card: Dexe */}
+          <button
+            onClick={() => setActiveTab('dexe')}
+            className={`w-full p-4 rounded-2xl border text-left transition-all relative flex items-center gap-4 group cursor-pointer ${
+              activeTab === 'dexe'
+                ? 'border-teal-500 bg-[#161724] ring-1 ring-teal-500 shadow-xl'
+                : 'border-[#242533] bg-[#101118] hover:border-zinc-500'
+            }`}
+          >
+            <div className="w-16 h-16 rounded-xl overflow-hidden bg-black/50 border border-white/10 shrink-0">
+              <img
+                src="/images/dexe_black_hair_shampoo.jpg"
+                alt="Dexe Black Hair Shampoo"
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+              />
+            </div>
+            <div className="flex-1 min-w-0">
+              <div className="flex items-center gap-1 text-[10px] font-bold text-teal-400 uppercase">
+                <span>5-Min Quick Dye</span>
+              </div>
+              <div className="text-sm font-bold text-white truncate mt-0.5">Dexe Black Hair Shampoo</div>
+              <div className="text-xs text-zinc-400 truncate">400ml Salon Pump Dispenser</div>
+              <div className="text-xs font-bold text-teal-400 mt-1">{formatPKR(1850)}</div>
+            </div>
+            <ChevronRight className={`w-4 h-4 transition-transform ${activeTab === 'dexe' ? 'text-teal-400 translate-x-1' : 'text-zinc-600'}`} />
           </button>
 
           {/* Trust Guarantee Box */}

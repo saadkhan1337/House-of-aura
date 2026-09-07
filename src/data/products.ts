@@ -3,11 +3,11 @@ import { Product } from '../types';
 export const INITIAL_PRODUCTS: Product[] = [
   {
     id: 'hoa-apple-hair-color',
-    name: 'Apple Italian Ammonia-Free Hair Color (500ml + 500ml Jumbo Twin Pack)',
-    subtitle: 'Clear Water Type • Zero Stains on Scalp or Clothes • 96 Hours Lasting Shine',
+    name: 'Apple Ammonia-Free Black Hair Cream (500ml + 500ml Jumbo Kit)',
+    subtitle: '500ml + 500ml Jumbo Value Pack • Zero Towel & Scalp Stains',
     category: 'Hair Care',
     displayCategoryTab: ['All', 'Hair Care'],
-    description: 'A revolutionary salon-grade instant hair coloring cream imported directly from Dubai. Formulated with clear water technology to guarantee zero stains on skin or garments, 100% gray coverage in 15-20 minutes, and 96 hours of radiant diamond shine.',
+    description: 'Pure herbal formulation from Dubai. 100% grey hair coverage with zero scalp irritation, infused with fresh green apple extracts for lasting gloss and fragrance.',
     usp: [
       '500ml + 500ml Jumbo Dual-Bottle Value Pack',
       'Clear Water Type: Zero Stains on Scalp or Clothes',
@@ -18,11 +18,10 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 489,
     featured: true,
     featuredRank: 1,
-    image: '/images/apple_hair_color_3d_unified.jpg',
+    image: '/images/studio_variants/studio_apple_pouch_500ml_front.jpg',
     galleryImages: [
-      '/images/apple_hair_color_3d_unified.jpg',
-      '/images/apple_hair_color.png',
-      '/images/variants/apple_pouch_500ml_front.jpg'
+      '/images/studio_variants/studio_apple_pouch_500ml_front.jpg',
+      '/images/studio_variants/studio_apple_pouch_500ml_back.jpg'
     ],
     varieties: [
       {
@@ -36,18 +35,27 @@ export const INITIAL_PRODUCTS: Product[] = [
       },
       {
         id: 'var-dark-brown-3',
-        name: '3.0 Dark Velvet Brown',
+        name: '3.0 Dark Brown',
         type: 'shade',
         hexColor: '#301e14',
         inStock: true,
         stockQty: 60,
         badge: 'Bestseller'
+      },
+      {
+        id: 'var-chocolate-4-3',
+        name: '4.3 Chocolate',
+        type: 'shade',
+        hexColor: '#4a2d18',
+        inStock: true,
+        stockQty: 40,
+        badge: 'Popular'
       }
     ],
     pricing: {
       retailPrice: 2499,
       originalPrice: 3800,
-      bundleDiscountPrice: 4500,
+      bundleDiscountPrice: 4499,
       wholesalePrice: 1750,
       minWholesaleQty: 6
     },
@@ -153,6 +161,46 @@ export const INITIAL_PRODUCTS: Product[] = [
         hexColor: '#b85d19',
         inStock: true,
         stockQty: 30
+      },
+      {
+        id: 'var-hamidi-al-zuhur',
+        name: 'Bakhoor Al Zuhur (Fresh Arabian Florals)',
+        type: 'scent',
+        hexColor: '#c97a8e',
+        inStock: true,
+        stockQty: 25
+      },
+      {
+        id: 'var-hamidi-bayt-al-oud',
+        name: 'Bakhoor Bayt Al Oud (Deep Woody Heritage)',
+        type: 'scent',
+        hexColor: '#4a2e1b',
+        inStock: true,
+        stockQty: 30
+      },
+      {
+        id: 'var-hamidi-khalifa',
+        name: 'Bakhoor Khalifa (Imperial Amber & Musk)',
+        type: 'scent',
+        hexColor: '#966d3b',
+        inStock: true,
+        stockQty: 28
+      },
+      {
+        id: 'var-hamidi-oud-abiyad',
+        name: 'Bakhoor Oud Abiyad (Velvet White Oud)',
+        type: 'scent',
+        hexColor: '#e6ded4',
+        inStock: true,
+        stockQty: 32
+      },
+      {
+        id: 'var-hamidi-oud-maghrib',
+        name: 'Bakhoor Oud Maghrib (Exotic Sunset Saffron)',
+        type: 'scent',
+        hexColor: '#8c3d26',
+        inStock: true,
+        stockQty: 25
       }
     ],
     pricing: {
@@ -162,62 +210,61 @@ export const INITIAL_PRODUCTS: Product[] = [
       wholesalePrice: 1350,
       minWholesaleQty: 8
     },
-    tags: ['Dubai Fragrances', 'Royal Incense', 'Agarwood', 'Bestseller'],
+    tags: ['Dubai Fragrances', 'Royal Incense', 'Agarwood', '8 Scent Varieties', 'Bestseller'],
     origin: 'Deira Perfume Souk, Dubai UAE',
     volumeOrWeight: 'Airtight Crystal & Gold Jar',
     howToUse: 'Place a small piece on heated charcoal or an electric incense burner (mabkhara). Let the aromatic smoke perfume the living area, clothing, and prayer spaces.',
     ingredients: 'Crushed Cambodian Agarwood, Pure Oud Oil, Amber, Taif Rose Attar, Saffron, Sandalwood, Musk, Natural Aromatic Resins.'
   },
   {
-    id: 'hoa-hamidi-fragrance',
-    name: 'Hamidi Arabian Luxury Fragrance (Royal Attar & Eau de Parfum)',
-    subtitle: 'Master-Crafted in Dubai • Taif Rose, Warm Spices & Velvet White Oudh',
-    category: 'Fragrances',
-    displayCategoryTab: ['All', 'Fragrances'],
-    description: 'A distinguished royal fragrance from the masters of Arabian perfumery in Dubai. Featuring an opulent opening of Taif rose and rare spices, unfurling into a heart of amber and crowned with a long-lasting base of pure white oudh.',
+    id: 'hoa-dexe-black-hair-shampoo',
+    name: 'Dexe Black Hair Color Shampoo (400ml Jumbo Pump Bottle)',
+    subtitle: 'Instant 5-Minute Natural Black Color • Herbal Plant Formula • 100% Ammonia-Free',
+    category: 'Hair Care',
+    displayCategoryTab: ['All', 'Hair Care'],
+    description: 'The world-renowned Dexe Black Hair Shampoo transforms white or gray hair to rich, natural black in just 5 minutes. Formulated with herbal plant extracts including Chinese ginseng, black sesame, and argan oil, it deeply nourishes the scalp while providing long-lasting, salon-grade black coverage without staining skin.',
     usp: [
-      'Master-Crafted in Dubai with Premium Natural Essences',
-      'Opening with Taif Rose & Warm Spices, Settling into White Oudh',
-      'Ultra Long-Lasting 24-Hour Sillage & Projection',
-      'Luxury Faceted Crystal Flacon with Golden Crown Cap'
+      'Instant Rich Natural Black Hair in Just 5 Minutes',
+      '100% Ammonia-Free & PPD-Safe Scalp Nourishing Formula',
+      'Easy Shampoo-In Application: Wash, Wait 5 Mins & Rinse',
+      'Long-Lasting Up to 30 Days Shine & Fade-Resistant Color'
     ],
-    rating: 4.96,
-    reviewCount: 312,
+    rating: 4.93,
+    reviewCount: 418,
     featured: true,
     featuredRank: 4,
-    image: '/images/hamidi_fragrance.png',
+    image: '/images/dexe_black_hair_shampoo.jpg',
     galleryImages: [
-      '/images/hamidi_fragrance.png'
+      '/images/dexe_black_hair_shampoo.jpg'
     ],
     varieties: [
       {
-        id: 'var-fragrance-edp-100ml',
-        name: '100ml Eau de Parfum Spray',
-        type: 'size',
-        hexColor: '#d4af37',
+        id: 'var-dexe-black-400ml',
+        name: '400ml Natural Black (Salon Dispenser)',
+        type: 'shade',
+        hexColor: '#0a0a0a',
         inStock: true,
-        stockQty: 50,
-        badge: 'Dubai Edition'
+        stockQty: 120,
+        badge: 'Natural Black'
       }
     ],
     pricing: {
-      retailPrice: 2850,
-      originalPrice: 4500,
-      bundleDiscountPrice: 5200,
-      wholesalePrice: 2100,
-      minWholesaleQty: 4
+      retailPrice: 1850,
+      originalPrice: 3200,
+      bundleDiscountPrice: 3200,
+      wholesalePrice: 1250,
+      minWholesaleQty: 6
     },
-    tags: ['Authentic Dubai Import', 'Haute Perfumery', 'Taif Rose', 'White Oudh'],
-    origin: 'Dubai, UAE',
-    volumeOrWeight: '100ml Luxury Flacon',
-    howToUse: 'Spray directly onto pulse points (wrists, neck, chest) for maximum projection and all-day fragrance throw.',
-    ingredients: 'Alcohol Denat., Parfum (Fragrance), Aqua, Agarwood (Oud) Oil, Taif Rose Essence, Amber, Benzyl Salicylate, Linalool, Limonene.'
+    tags: ['5-Minute Fast Dye', 'Natural Black', 'Ammonia Free', 'Herbal Extract'],
+    origin: 'Imported Salon Grade Formula',
+    volumeOrWeight: '400ml Salon Pump Dispenser',
+    howToUse: 'Wet hair thoroughly and dry slightly with a towel. Wear protective gloves, pump an adequate amount onto palms, mix well, and massage into hair for 5 minutes. Leave on for 5 to 10 minutes, then rinse completely with clean water.',
+    ingredients: 'Herbal Ginseng Extract, Black Sesame Extract, Hydrolyzed Keratin, Argania Spinosa Kernel Oil, Pure Water, Natural Color Actives.'
   }
 ];
 
 export const CATEGORY_TABS = [
   'All',
   'Hair Care',
-  'Arabian Bakhoor',
-  'Fragrances'
+  'Arabian Bakhoor'
 ];
