@@ -80,6 +80,10 @@ export function applyCoupon(code: string, subtotal: number): CouponResult {
     const discount = Math.round(subtotal * 0.1);
     return { valid: true, code: 'AURA10', discountPercentage: 10, discountAmount: discount, message: '10% Aura Welcome Discount Applied!' };
   }
+  if (['FB5', 'AURA5', 'FACEBOOK5', 'REFERRAL5'].includes(cleaned)) {
+    const discount = Math.round(subtotal * 0.05);
+    return { valid: true, code: cleaned, discountPercentage: 5, discountAmount: discount, message: '5% Facebook Referral Promo Applied!' };
+  }
   if (cleaned === 'DUBAI15') {
     const discount = Math.round(subtotal * 0.15);
     return { valid: true, code: 'DUBAI15', discountPercentage: 15, discountAmount: discount, message: '15% Dubai Import Celebration Discount Applied!' };
@@ -88,5 +92,5 @@ export function applyCoupon(code: string, subtotal: number): CouponResult {
     const discount = Math.round(subtotal * 0.2);
     return { valid: true, code: 'SALONVIP', discountPercentage: 20, discountAmount: discount, message: '20% Professional Studio Discount Applied!' };
   }
-  return { valid: false, code: '', discountPercentage: 0, discountAmount: 0, message: 'Invalid or expired promo code.' };
+  return { valid: false, code: '', discountPercentage: 0, discountAmount: 0, message: 'Invalid or expired promo code. Try FB5 or AURA10.' };
 }

@@ -81,7 +81,7 @@ export const CartDrawer: React.FC<CartDrawerProps> = (props) => {
       onApplyCoupon(result.code);
       setCouponInput('');
     } else {
-      setCouponError('Invalid promo code. Try AURA10 or DUBAI15.');
+      setCouponError('Invalid promo code. Try FB5, AURA10 or DUBAI15.');
     }
   };
 
@@ -247,13 +247,13 @@ export const CartDrawer: React.FC<CartDrawerProps> = (props) => {
                   </button>
                 </div>
               ) : (
-                <form onSubmit={handleApplyCouponSubmit} className="space-y-1">
+                <form onSubmit={handleApplyCouponSubmit} className="space-y-1.5">
                   <div className="flex gap-2">
                     <input
                       type="text"
                       value={couponInput}
                       onChange={(e) => setCouponInput(e.target.value)}
-                      placeholder="Promo Code (AURA10 / DUBAI15)"
+                      placeholder="Promo Code (FB5 / AURA10)"
                       className="flex-1 bg-[#181818] border border-[#333] px-3 py-1.5 text-xs text-white uppercase rounded-sm outline-none focus:border-[#D4AF37]"
                     />
                     <button
@@ -261,6 +261,16 @@ export const CartDrawer: React.FC<CartDrawerProps> = (props) => {
                       className="bg-[#262626] hover:bg-[#333] text-white px-3 py-1.5 text-xs font-bold uppercase rounded-sm border border-[#3a3a3a]"
                     >
                       Apply
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between text-[10px] text-zinc-400">
+                    <span>Facebook Visitor?</span>
+                    <button
+                      type="button"
+                      onClick={() => onApplyCoupon('FB5')}
+                      className="text-emerald-400 hover:text-emerald-300 font-bold underline cursor-pointer"
+                    >
+                      Apply "FB5" for Extra 5% OFF
                     </button>
                   </div>
                   {couponError && <p className="text-[10px] text-red-400">{couponError}</p>}

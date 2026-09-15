@@ -332,6 +332,12 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       if (isEligibleWholesale && product.pricing?.wholesalePrice) {
         appliedUnitPrice = product.pricing.wholesalePrice;
         isWholesale = true;
+      } else if (product.id === 'hoa-bakhoor-hamidi') {
+        if (item.quantity >= 3) {
+          appliedUnitPrice = 4000 / 3; // Pack of 3 Deal = Rs. 4,000 total
+        } else if (item.quantity === 2) {
+          appliedUnitPrice = 2999 / 2; // Pack of 2 Deal = Rs. 2,999 total
+        }
       } else if (item.quantity >= 2 && product.pricing?.bundleDiscountPrice) {
         appliedUnitPrice = product.pricing.bundleDiscountPrice;
       }

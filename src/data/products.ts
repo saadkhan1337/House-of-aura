@@ -18,44 +18,39 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 489,
     featured: true,
     featuredRank: 1,
-    image: '/images/studio_variants/studio_apple_pouch_500ml_front.jpg',
+    image: '/images/apple_hair_cream_offer_2499.jpg',
     galleryImages: [
-      '/images/studio_variants/studio_apple_pouch_500ml_front.jpg',
-      '/images/studio_variants/studio_apple_pouch_500ml_back.jpg'
+      '/images/apple_hair_cream_offer_2499.jpg',
+      '/images/apple_hair_box_with_pouches_official.jpg',
+      '/images/apple_hair_pouch_real_camera.jpg',
+      '/images/apple_hair_pouch_real_back.jpg',
+      '/images/apple_hair_cream_daraz_showcase.jpg',
+      '/images/apple_hair_cream_white_studio.jpg'
     ],
     varieties: [
       {
-        id: 'var-natural-black-1',
-        name: '1.0 Natural Black',
-        type: 'shade',
-        hexColor: '#0c0c0c',
-        inStock: true,
-        stockQty: 85,
-        badge: 'Top Shade'
-      },
-      {
         id: 'var-dark-brown-3',
-        name: '3.0 Dark Brown',
+        name: 'Dark Brown',
         type: 'shade',
         hexColor: '#301e14',
         inStock: true,
         stockQty: 60,
-        badge: 'Bestseller'
+        badge: 'In Stock'
       },
       {
-        id: 'var-chocolate-4-3',
-        name: '4.3 Chocolate',
+        id: 'var-medium-brown-4',
+        name: 'Medium Brown',
         type: 'shade',
-        hexColor: '#4a2d18',
+        hexColor: '#5a3825',
         inStock: true,
-        stockQty: 40,
-        badge: 'Popular'
+        stockQty: 50,
+        badge: 'In Stock'
       }
     ],
     pricing: {
       retailPrice: 2499,
-      originalPrice: 3800,
-      bundleDiscountPrice: 4499,
+      originalPrice: 3500,
+      bundleDiscountPrice: 4500,
       wholesalePrice: 1750,
       minWholesaleQty: 6
     },
@@ -82,11 +77,11 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 374,
     featured: true,
     featuredRank: 2,
-    image: '/images/cosmo_keratin_shampoo_3d_unified.jpg',
+    image: '/images/cosmo_keratin_daraz_showcase.jpg',
     galleryImages: [
-      '/images/cosmo_keratin_shampoo_3d_unified.jpg',
-      '/images/cosmo_keratin_shampoo_1000ml.jpg',
-      '/images/cosmo_shampoo.png'
+      '/images/cosmo_keratin_daraz_showcase.jpg',
+      '/images/cosmo_keratin_white_studio.jpg',
+      '/images/cosmo_keratin_macro_detail.jpg'
     ],
     varieties: [
       {
@@ -129,11 +124,18 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 520,
     featured: true,
     featuredRank: 3,
-    image: '/images/bakhoor_hamidi_3d_unified.jpg',
+    image: '/images/bakhoor_8set_art_of_scent.jpg',
     galleryImages: [
-      '/images/bakhoor_hamidi_3d_unified.jpg',
-      '/images/bakhoor_hamidi_8flavours.jpg',
-      '/images/hamidi_bakhoor.png'
+      '/images/bakhoor_8set_art_of_scent.jpg',
+      '/images/bakhoor_8set_master_poster.jpg',
+      '/images/bakhoor_pack_of_3_offer.jpg',
+      '/images/bakhoor_pack_of_2_duo_official.jpg',
+      '/images/bakhoor_black_oud_official.jpg',
+      '/images/bakhoor_khalifa_official.jpg',
+      '/images/bakhoor_oud_abiyad_official.jpg',
+      '/images/bakhoor_al_zuhur_official.jpg',
+      '/images/bakhoor_oud_maghrib_official.jpg',
+      '/images/bakhoor_oud_sharqia_official.jpg'
     ],
     varieties: [
       {
@@ -204,9 +206,9 @@ export const INITIAL_PRODUCTS: Product[] = [
       }
     ],
     pricing: {
-      retailPrice: 1999,
-      originalPrice: 2800,
-      bundleDiscountPrice: 3500,
+      retailPrice: 1799,
+      originalPrice: 2499,
+      bundleDiscountPrice: 1500,
       wholesalePrice: 1350,
       minWholesaleQty: 8
     },
@@ -233,8 +235,9 @@ export const INITIAL_PRODUCTS: Product[] = [
     reviewCount: 418,
     featured: true,
     featuredRank: 4,
-    image: '/images/dexe_black_hair_shampoo.jpg',
+    image: '/images/dexe_hair_shampoo_offer_2099.jpg',
     galleryImages: [
+      '/images/dexe_hair_shampoo_offer_2099.jpg',
       '/images/dexe_black_hair_shampoo.jpg'
     ],
     varieties: [
@@ -249,10 +252,10 @@ export const INITIAL_PRODUCTS: Product[] = [
       }
     ],
     pricing: {
-      retailPrice: 1850,
-      originalPrice: 3200,
-      bundleDiscountPrice: 3200,
-      wholesalePrice: 1250,
+      retailPrice: 2099,
+      originalPrice: 3000,
+      bundleDiscountPrice: 3800,
+      wholesalePrice: 1450,
       minWholesaleQty: 6
     },
     tags: ['5-Minute Fast Dye', 'Natural Black', 'Ammonia Free', 'Herbal Extract'],
