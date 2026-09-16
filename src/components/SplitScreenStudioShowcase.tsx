@@ -46,7 +46,6 @@ export const SplitScreenStudioShowcase: React.FC = () => {
   const [activeTab, setActiveTab] = useState<ProductTabKey>('apple');
 
   // Apple Hair Cream State
-  const [appleView, setAppleView] = useState<'showcase' | 'combo' | 'camera_front' | 'camera_back'>('showcase');
   const [appleShade, setAppleShade] = useState('Dark Brown');
   const [secondAppleShade, setSecondAppleShade] = useState('Medium Brown');
   const [appleDeal, setAppleDeal] = useState<'single' | 'duo'>('single');
@@ -87,7 +86,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
       {/* ───────────────────────────────────────────────────────────────── */}
       {/* LUXURY WELCOME GREETING & TRUST HEADER                            */}
       {/* ───────────────────────────────────────────────────────────────── */}
-      <div className="mb-8 p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-white via-[#fcfbf9] to-[#f7f2ea] border border-[#e8dfd3] shadow-lg shadow-stone-200/50 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
+      <div className="mb-5 p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-white via-[#fcfbf9] to-[#f7f2ea] border border-[#e8dfd3] shadow-md relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="relative z-10 space-y-1.5">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#c5a880]/20 text-[#8c6b38] text-xs font-bold uppercase tracking-wider border border-[#c5a880]/40">
             <Sparkles className="w-3.5 h-3.5 text-[#b38a48]" />
@@ -225,7 +224,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                         </div>
                         <div className="flex-1 w-full flex items-center justify-center p-1 bg-[#faf8f5] rounded-xl overflow-hidden">
                           <img
-                            src="/images/apple_hair_box_with_pouches_official.jpg"
+                            src="/images/apple_hair_cream_offer_2499.jpg"
                             alt={`Apple Hair Cream - Box 2 (${secondAppleShade})`}
                             className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
                           />
@@ -244,15 +243,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
 
                       <div className="flex-1 w-full flex items-center justify-center p-2 bg-[#faf8f5] rounded-xl overflow-hidden">
                         <img
-                          src={
-                            appleView === 'combo'
-                              ? '/images/apple_hair_box_with_pouches_official.jpg'
-                              : appleView === 'camera_front'
-                              ? '/images/apple_hair_pouch_real_camera.jpg'
-                              : appleView === 'camera_back'
-                              ? '/images/apple_hair_pouch_real_back.jpg'
-                              : '/images/apple_hair_cream_offer_2499.jpg'
-                          }
+                          src="/images/apple_hair_cream_offer_2499.jpg"
                           alt="Apple Ammonia-Free Hair Cream 500ml"
                           className="max-w-full max-h-full object-contain group-hover:scale-105 transition-transform duration-500"
                         />
@@ -264,53 +255,6 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                       </div>
                     </div>
                   )}
-
-                  {/* Multi-angle authentic photo switcher */}
-                  <div className="grid grid-cols-4 gap-1.5">
-                    <button
-                      onClick={() => setAppleView('showcase')}
-                      className={`py-2 px-1 rounded-lg border text-[10px] font-bold transition-all text-center cursor-pointer ${
-                        appleView === 'showcase' && appleDeal !== 'duo'
-                          ? 'border-zinc-900 bg-zinc-900 text-[#f5ebd9] shadow-sm'
-                          : 'border-stone-200 bg-white text-zinc-700 hover:bg-stone-50'
-                      }`}
-                    >
-                      Showcase
-                    </button>
-                    <button
-                      onClick={() => {
-                        setAppleView('combo');
-                        setAppleDeal('duo');
-                      }}
-                      className={`py-2 px-1 rounded-lg border text-[10px] font-bold transition-all text-center cursor-pointer ${
-                        appleView === 'combo' || appleDeal === 'duo'
-                          ? 'border-emerald-700 bg-emerald-700 text-white shadow-sm'
-                          : 'border-stone-200 bg-white text-zinc-700 hover:bg-stone-50'
-                      }`}
-                    >
-                      Duo Pack
-                    </button>
-                    <button
-                      onClick={() => setAppleView('camera_front')}
-                      className={`py-2 px-1 rounded-lg border text-[10px] font-bold transition-all text-center cursor-pointer ${
-                        appleView === 'camera_front'
-                          ? 'border-zinc-900 bg-zinc-900 text-[#f5ebd9] shadow-sm'
-                          : 'border-stone-200 bg-white text-zinc-700 hover:bg-stone-50'
-                      }`}
-                    >
-                      Real Pouch
-                    </button>
-                    <button
-                      onClick={() => setAppleView('camera_back')}
-                      className={`py-2 px-1 rounded-lg border text-[10px] font-bold transition-all text-center cursor-pointer ${
-                        appleView === 'camera_back'
-                          ? 'border-zinc-900 bg-zinc-900 text-[#f5ebd9] shadow-sm'
-                          : 'border-stone-200 bg-white text-zinc-700 hover:bg-stone-50'
-                      }`}
-                    >
-                      Back Info
-                    </button>
-                  </div>
                 </div>
 
                 {/* Details & Action Box */}
@@ -339,10 +283,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                     </label>
                     <div className="grid grid-cols-2 gap-2.5">
                       <button
-                        onClick={() => {
-                          setAppleDeal('single');
-                          setAppleView('showcase');
-                        }}
+                        onClick={() => setAppleDeal('single')}
                         className={`p-3 rounded-xl border text-left transition-all cursor-pointer ${
                           appleDeal === 'single'
                             ? 'border-[#c5a880] bg-[#faf6ef] ring-2 ring-[#c5a880] shadow-sm'
@@ -355,10 +296,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                       </button>
 
                       <button
-                        onClick={() => {
-                          setAppleDeal('duo');
-                          setAppleView('combo');
-                        }}
+                        onClick={() => setAppleDeal('duo')}
                         className={`p-3 rounded-xl border text-left transition-all relative cursor-pointer ${
                           appleDeal === 'duo'
                             ? 'border-emerald-600 bg-emerald-50/70 ring-2 ring-emerald-600 shadow-sm'
