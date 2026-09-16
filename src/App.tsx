@@ -18,7 +18,7 @@ import { Footer } from './components/Footer';
 export default function App() {
   return (
     <StoreProvider>
-      <div className="min-h-screen bg-[#0c0d12] text-zinc-100 font-sans selection:bg-[#c5a880] selection:text-[#0c0d12]">
+      <div className="min-h-screen bg-[#faf8f5] text-[#18181b] font-sans selection:bg-[#c5a880] selection:text-[#18181b]">
         {/* Main Header & Announcement */}
         <Navbar />
 
