@@ -2,6 +2,7 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product, ProductVariety, CartItem, User, SavedAddress, Order, CategoryType, TagType, ToastMessage, AccountType } from '../types';
 import { INITIAL_PRODUCTS } from '../data/products';
 import { generateOrderTrackingCode, sanitizeInput } from '../utils/security';
+import { trackTrafficEvent, submitOrderToBackend } from '../utils/telemetry';
 
 interface StoreContextType {
   products: Product[];
@@ -414,6 +415,8 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       'Added to Aura Shopping Bag',
       `${product.name} (${chosenVariety.name}) x${qty}`
     );
+
+    trackTrafficEvent('ADD_TO_CART', product.id).catch(() => {});
   };
 
   const updateCartQuantity = (cartItemId: string, newQty: number) => {
@@ -572,20 +575,24 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     const shippingFee = isFreeShip ? 0 : 250;
     const totalAmount = cartTotal + shippingFee;
 
+    const itemsForApi = cartCalculations.map((item) => ({
+      product_id: item.product.id,
+      productId: item.product.id,
+      productName: item.product.name,
+      varietyName: item.selectedVariety.name,
+      varietyType: item.selectedVariety.type,
+      image: item.product.image,
+      quantity: item.quantity,
+      unitPrice: item.appliedUnitPrice,
+      totalPrice: item.appliedUnitPrice * item.quantity,
+      isWholesale: item.isWholesaleApplied,
+      deal_type: item.selectedVariety.name
+    }));
+
     const newOrder: Order = {
       id: trackingId,
       createdAt: new Date().toISOString(),
-      items: cartCalculations.map((item) => ({
-        productId: item.product.id,
-        productName: item.product.name,
-        varietyName: item.selectedVariety.name,
-        varietyType: item.selectedVariety.type,
-        image: item.product.image,
-        quantity: item.quantity,
-        unitPrice: item.appliedUnitPrice,
-        totalPrice: item.appliedUnitPrice * item.quantity,
-        isWholesale: item.isWholesaleApplied
-      })),
+      items: itemsForApi,
       customer: {
         fullName: sanitizeInput(orderPayload.customer.fullName),
         email: sanitizeInput(orderPayload.customer.email),
@@ -610,6 +617,27 @@ export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       estimatedDelivery: 'Within 2-3 Business Days via Express Courier',
       trackingCourier: 'TCS / Leopards Express'
     };
+
+    // Synchronize to Jarvis Sentinel Backend (POST /api/hoa/orders)
+    const backendPayload = {
+      order_id: trackingId,
+      idempotency_key: trackingId,
+      customer: newOrder.customer,
+      shippingAddress: newOrder.shippingAddress,
+      items: itemsForApi,
+      payment_method: orderPayload.paymentMethod,
+      notes: orderPayload.notes ? sanitizeInput(orderPayload.notes) : undefined
+    };
+
+    submitOrderToBackend(backendPayload).then((res) => {
+      if (res.success && res.orderId) {
+        console.log('[HOA Sentinel] Web order securely persisted into backend:', res.orderId);
+      }
+    }).catch((err) => {
+      console.warn('[HOA Sentinel] Backend sync note:', err);
+    });
+
+    trackTrafficEvent('ORDER_CREATED', itemsForApi[0]?.product_id).catch(() => {});
 
     setOrders((prev) => [newOrder, ...prev]);
     clearCart();

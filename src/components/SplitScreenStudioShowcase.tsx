@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useStore } from '../context/StoreContext';
 import { BRAND_CONFIG } from '../data/constants';
 import { formatPKR } from '../utils/security';
+import { trackProductView, trackAddToCart, trackWhatsAppPurchase } from '../utils/metaPixel';
 import {
   Sparkles,
   ShoppingBag,
@@ -28,25 +29,82 @@ interface BakhoorScentConfig {
   color: string;
 }
 
+// 8 Fragrances configuration from Dubai
 const BAKHOOR_SCENTS: BakhoorScentConfig[] = [
-  { id: 'black_oud', name: 'Bakhoor Black Oud (Intense Agarwood)', shortName: 'Black Oud', image: '/images/bakhoor_black_oud_offer_1799.jpg', tag: 'Top Oud', color: '#1a1a1a' },
-  { id: 'sheikha', name: 'Bakhoor Sheikha (Royal Floral Amber)', shortName: 'Sheikha', image: '/images/creatives/bakhoor_sheikha_showcase.jpg', tag: 'Bestseller', color: '#d4af37' },
-  { id: 'oud_sharqia', name: 'Bakhoor Oud Sharqia (Warm Spicy)', shortName: 'Oud Sharqia', image: '/images/bakhoor_oud_sharqia_official.jpg', tag: 'Spicy', color: '#b85d19' },
-  { id: 'bayt_al_oud', name: 'Bakhoor Bayt Al Oud (Deep Woody)', shortName: 'Bayt Al Oud', image: '/images/bakhoor_bayt_al_oud_offer_1799.jpg', tag: 'Woody', color: '#4a2c11' },
-  { id: 'al_zuhur', name: 'Bakhoor Al Zuhur (Rose Blossom)', shortName: 'Al Zuhur', image: '/images/bakhoor_al_zuhur_offer_1799.jpg', tag: 'Floral', color: '#8a2be2' },
-  { id: 'oud_maghrib', name: 'Bakhoor Oud Maghrib (Moroccan Saffron)', shortName: 'Oud Maghrib', image: '/images/bakhoor_oud_maghrib_official.jpg', tag: 'Exotic', color: '#c0392b' },
-  { id: 'khalifa', name: 'Bakhoor Khalifa (Smoky Amber Oud)', shortName: 'Khalifa', image: '/images/bakhoor_khalifa_official.jpg', tag: 'Royal', color: '#7f8c8d' },
-  { id: 'oud_abiyad', name: 'Bakhoor Oud Abiyad (White Musk)', shortName: 'Oud Abiyad', image: '/images/bakhoor_oud_abiyad_official.jpg', tag: 'Sweet', color: '#bdc3c7' }
+  {
+    id: 'black_oud',
+    name: 'Black Oud (Palace Reserve)',
+    shortName: 'Black Oud',
+    image: '/images/bakhoor_black_oud_offer_1799.jpg',
+    tag: '👑 Royal Signature',
+    color: 'from-amber-950/40 via-stone-900 to-black'
+  },
+  {
+    id: 'bayt_al_oud',
+    name: 'Bayt Al Oud (Home Sanctuary)',
+    shortName: 'Bayt Al Oud',
+    image: '/images/bakhoor_bayt_al_oud_offer_1799.jpg',
+    tag: '✨ Calming Serenity',
+    color: 'from-stone-900 via-amber-950/30 to-black'
+  },
+  {
+    id: 'al_zuhur',
+    name: 'Al Zuhur (Taif Rose Bouquet)',
+    shortName: 'Al Zuhur',
+    image: '/images/bakhoor_al_zuhur_art_of_scent.jpg',
+    tag: '🌹 Fresh Floral',
+    color: 'from-rose-950/40 via-stone-900 to-black'
+  },
+  {
+    id: 'fatima',
+    name: 'Fatima (Sweet Amber Silk)',
+    shortName: 'Fatima',
+    image: '/images/bakhoor_fatima_art_of_scent.jpg',
+    tag: '🍯 Velvety Warm',
+    color: 'from-amber-900/40 via-stone-900 to-black'
+  },
+  {
+    id: 'marwa',
+    name: 'Marwa (Fresh Morning Mist)',
+    shortName: 'Marwa',
+    image: '/images/bakhoor_marwa_art_of_scent.jpg',
+    tag: '🌿 Crisp Elegance',
+    color: 'from-emerald-950/40 via-stone-900 to-black'
+  },
+  {
+    id: 'oud_rose',
+    name: 'Oud Rose (Prestige Blend)',
+    shortName: 'Oud Rose',
+    image: '/images/bakhoor_oud_rose_art_of_scent.jpg',
+    tag: '💎 High Radiance',
+    color: 'from-purple-950/40 via-stone-900 to-black'
+  },
+  {
+    id: 'rawda',
+    name: 'Rawda (Green Garden Peace)',
+    shortName: 'Rawda',
+    image: '/images/bakhoor_rawda_art_of_scent.jpg',
+    tag: '🕊️ Spiritual Peace',
+    color: 'from-teal-950/40 via-stone-900 to-black'
+  },
+  {
+    id: 'safa',
+    name: 'Safa (White Amber & Musk)',
+    shortName: 'Safa',
+    image: '/images/bakhoor_safa_art_of_scent.jpg',
+    tag: '🤍 Pure Cleanliness',
+    color: 'from-stone-800 via-stone-900 to-black'
+  }
 ];
 
 export const SplitScreenStudioShowcase: React.FC = () => {
   const { products, addToCart, showToast } = useStore();
 
-  // Active Main Product Tab
+  // Active showcase tab (4 main luxury items)
   const [activeTab, setActiveTab] = useState<ProductTabKey>('apple');
 
-  // Apple Hair Cream State
-  const [appleShade, setAppleShade] = useState('Dark Brown');
+  // Apple Hair Cream State (500ml)
+  const [appleShade, setAppleShade] = useState('Natural Black');
   const [secondAppleShade, setSecondAppleShade] = useState('Medium Brown');
   const [appleDeal, setAppleDeal] = useState<'single' | 'duo'>('single');
 
@@ -62,14 +120,36 @@ export const SplitScreenStudioShowcase: React.FC = () => {
   // Dexe Hair Color Shampoo State (400ml)
   const [dexeDeal, setDexeDeal] = useState<'single' | 'duo'>('single');
 
-  // Direct WhatsApp Checkout Helper
-  const handleWhatsAppCheckout = (title: string, spec: string, price: number) => {
+  // Direct WhatsApp Checkout Helper with Meta Pixel Tracking
+  const handleWhatsAppCheckout = (catalogSku: string, title: string, spec: string, price: number) => {
+    trackWhatsAppPurchase(catalogSku, title, price, 1);
     const phone = BRAND_CONFIG.supportPhone;
     const message = encodeURIComponent(
       `Assalam o Alaikum! I want to order from The House of Aura:\n\n🛍️ *Product:* ${title}\n📦 *Selection / Deal:* ${spec}\n💰 *Price:* ${formatPKR(price)}\n\nPlease confirm availability and express dispatch!`
     );
     window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
   };
+
+  // Meta Pixel: Track ViewContent matching catalog SKUs whenever user explores products / deals
+  useEffect(() => {
+    if (activeTab === 'apple') {
+      const sku = appleDeal === 'single' ? 'HOA-APPLE-500ML' : 'HOA-APPLE-DUO-PACK';
+      const price = appleDeal === 'single' ? 2499 : 4500;
+      trackProductView(sku, `Apple Ammonia-Free Hair Cream (${appleDeal === 'single' ? 'Single 500ml' : 'Duo Pack'})`, price);
+    } else if (activeTab === 'cosmo') {
+      const sku = cosmoDeal === 'single' ? 'HOA-COSMO-1000ML' : 'HOA-COSMO-DUO-PACK';
+      const price = cosmoDeal === 'single' ? 1970 : 3000;
+      trackProductView(sku, `COSMO Keratin Shampoo (${cosmoDeal === 'single' ? 'Single 1000ml' : 'Pack of 2 Duo Deal'})`, price);
+    } else if (activeTab === 'bakhoor') {
+      const sku = bakhoorDeal === 'duo' ? 'HOA-BAKHOOR-DUO' : bakhoorDeal === 'trio' ? 'HOA-BAKHOOR-TRIO' : bakhoorDeal === 'set8' ? 'HOA-BAKHOOR-8SET' : 'HOA-BAKHOOR-SINGLE';
+      const price = bakhoorDeal === 'duo' ? 2999 : bakhoorDeal === 'trio' ? 4000 : bakhoorDeal === 'set8' ? 7499 : 1799;
+      trackProductView(sku, `Hamidi Royal Arabian Bakhoor (${bakhoorDeal === 'set8' ? '8-Set Heritage Vault' : currentBakhoorScent.name})`, price);
+    } else if (activeTab === 'dexe') {
+      const sku = dexeDeal === 'single' ? 'HOA-DEXE-400ML' : 'HOA-DEXE-DUO-PACK';
+      const price = dexeDeal === 'single' ? 2099 : 3800;
+      trackProductView(sku, `Dexe Black Hair Color Shampoo (${dexeDeal === 'single' ? 'Single 400ml' : 'Pack of 2 Deal'})`, price);
+    }
+  }, [activeTab, appleDeal, cosmoDeal, bakhoorDeal, dexeDeal, selectedScentId]);
 
   // Compute Active Product Data safely
   const appleProduct = products.find((p) => p.id === 'apple-ammonia-free-hair-cream') || products[0];
@@ -386,6 +466,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                     <button
                       onClick={() =>
                         handleWhatsAppCheckout(
+                          appleDeal === 'single' ? 'HOA-APPLE-500ML' : 'HOA-APPLE-DUO-PACK',
                           'Apple Ammonia-Free Hair Cream (500ml+500ml)',
                           appleDeal === 'single'
                             ? `Single Jumbo Pack [${appleShade}]`
@@ -400,7 +481,11 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                     </button>
                     <button
                       onClick={() => {
-                        addToCart(appleProduct, appleProduct.varieties[0], appleDeal === 'single' ? 1 : 2);
+                        const sku = appleDeal === 'single' ? 'HOA-APPLE-500ML' : 'HOA-APPLE-DUO-PACK';
+                        const price = appleDeal === 'single' ? 2499 : 4500;
+                        const qty = appleDeal === 'single' ? 1 : 2;
+                        trackAddToCart(sku, 'Apple Ammonia-Free Hair Cream', price, qty);
+                        addToCart(appleProduct, appleProduct.varieties[0], qty);
                         showToast('success', 'Added to Bag!', `${appleProduct.name}`);
                       }}
                       className="py-3 px-4 rounded-xl bg-[#c5a880] hover:bg-[#b89569] text-zinc-950 font-black text-xs flex items-center justify-center gap-1.5 cursor-pointer shadow-md transition-all hover:scale-[1.01]"
@@ -542,6 +627,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                     <button
                       onClick={() =>
                         handleWhatsAppCheckout(
+                          cosmoDeal === 'single' ? 'HOA-COSMO-1000ML' : 'HOA-COSMO-DUO-PACK',
                           'COSMO Keratin Shampoo (1000ml)',
                           cosmoDeal === 'single' ? 'Single 1000ml Bottle' : 'Pack of 2 Duo Deal (2000ml)',
                           cosmoDeal === 'single' ? 1970 : 3000
@@ -554,7 +640,11 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                     </button>
                     <button
                       onClick={() => {
-                        addToCart(cosmoProduct, cosmoProduct.varieties[0], cosmoDeal === 'single' ? 1 : 2);
+                        const sku = cosmoDeal === 'single' ? 'HOA-COSMO-1000ML' : 'HOA-COSMO-DUO-PACK';
+                        const price = cosmoDeal === 'single' ? 1970 : 3000;
+                        const qty = cosmoDeal === 'single' ? 1 : 2;
+                        trackAddToCart(sku, 'COSMO Keratin Shampoo', price, qty);
+                        addToCart(cosmoProduct, cosmoProduct.varieties[0], qty);
                         showToast('success', 'Added to Bag!', `${cosmoProduct.name}`);
                       }}
                       className="py-3 px-4 rounded-xl bg-[#c5a880] hover:bg-[#b89569] text-zinc-950 font-black text-xs flex items-center justify-center gap-1.5 cursor-pointer shadow-md transition-all hover:scale-[1.01]"
@@ -919,25 +1009,29 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                   <div className="pt-2 flex flex-col sm:flex-row gap-2.5">
                     <button
                       onClick={() => {
+                        let dealSku = 'HOA-BAKHOOR-SINGLE';
                         let dealTitle = 'Bakhoor Hamidi';
                         let dealPrice = 1799;
                         let dealSpec = currentBakhoorScent.name;
 
                         if (bakhoorDeal === 'duo') {
+                          dealSku = 'HOA-BAKHOOR-DUO';
                           dealTitle = 'Bakhoor Hamidi Pack of 2 Deal';
                           dealPrice = 2999;
                           dealSpec = `Jar 1: ${currentBakhoorScent.shortName} + Jar 2: ${secondBakhoorScent.shortName} (Save Rs. 599)`;
                         } else if (bakhoorDeal === 'trio') {
+                          dealSku = 'HOA-BAKHOOR-TRIO';
                           dealTitle = 'Bakhoor Hamidi Pack of 3 Deal';
                           dealPrice = 4000;
                           dealSpec = `Jar 1: ${currentBakhoorScent.shortName} + Jar 2: ${secondBakhoorScent.shortName} + Jar 3: ${thirdBakhoorScent.shortName} (Save Rs. 1,397)`;
                         } else if (bakhoorDeal === 'set8') {
+                          dealSku = 'HOA-BAKHOOR-8SET';
                           dealTitle = 'Bakhoor Hamidi 8-Set Heritage Vault';
                           dealPrice = 7499;
                           dealSpec = 'Complete 8 Scents Collection with Presentation Tray';
                         }
 
-                        handleWhatsAppCheckout(dealTitle, dealSpec, dealPrice);
+                        handleWhatsAppCheckout(dealSku, dealTitle, dealSpec, dealPrice);
                       }}
                       className="flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 hover:from-emerald-500 text-white font-bold text-xs shadow-lg shadow-emerald-600/20 flex items-center justify-center gap-2 cursor-pointer transition-all hover:scale-[1.01]"
                     >
@@ -947,6 +1041,23 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                     <button
                       onClick={() => {
                         const qty = bakhoorDeal === 'duo' ? 2 : bakhoorDeal === 'trio' ? 3 : bakhoorDeal === 'set8' ? 8 : 1;
+                        const dealSku =
+                          bakhoorDeal === 'duo'
+                            ? 'HOA-BAKHOOR-DUO'
+                            : bakhoorDeal === 'trio'
+                            ? 'HOA-BAKHOOR-TRIO'
+                            : bakhoorDeal === 'set8'
+                            ? 'HOA-BAKHOOR-8SET'
+                            : 'HOA-BAKHOOR-SINGLE';
+                        const price =
+                          bakhoorDeal === 'duo'
+                            ? 2999
+                            : bakhoorDeal === 'trio'
+                            ? 4000
+                            : bakhoorDeal === 'set8'
+                            ? 7499
+                            : 1799;
+                        trackAddToCart(dealSku, 'Hamidi Royal Arabian Bakhoor', price, qty);
                         addToCart(bakhoorProduct, bakhoorProduct.varieties[0], qty);
                         showToast('success', 'Added to Bag!', `${bakhoorProduct.name}`);
                       }}
@@ -1101,6 +1212,7 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                     <button
                       onClick={() =>
                         handleWhatsAppCheckout(
+                          dexeDeal === 'single' ? 'HOA-DEXE-400ML' : 'HOA-DEXE-DUO-PACK',
                           'Dexe Black Hair Color Shampoo (400ml)',
                           dexeDeal === 'single' ? 'Single 400ml Bottle' : 'Pack of 2 Bottles Deal (800ml)',
                           dexeDeal === 'single' ? 2099 : 3800
@@ -1113,7 +1225,11 @@ export const SplitScreenStudioShowcase: React.FC = () => {
                     </button>
                     <button
                       onClick={() => {
-                        addToCart(dexeProduct, dexeProduct.varieties[0], dexeDeal === 'single' ? 1 : 2);
+                        const sku = dexeDeal === 'single' ? 'HOA-DEXE-400ML' : 'HOA-DEXE-DUO-PACK';
+                        const price = dexeDeal === 'single' ? 2099 : 3800;
+                        const qty = dexeDeal === 'single' ? 1 : 2;
+                        trackAddToCart(sku, 'Dexe Black Hair Color Shampoo', price, qty);
+                        addToCart(dexeProduct, dexeProduct.varieties[0], qty);
                         showToast('success', 'Added to Bag!', `${dexeProduct.name}`);
                       }}
                       className="py-3 px-4 rounded-xl bg-[#c5a880] hover:bg-[#b89569] text-zinc-950 font-black text-xs flex items-center justify-center gap-1.5 cursor-pointer shadow-md transition-all hover:scale-[1.01]"

@@ -17,6 +17,7 @@ import {
   X
 } from 'lucide-react';
 import { motion } from 'motion/react';
+import { trackMetaEvent, mapProductToCatalogSku } from '../utils/metaPixel';
 
 export const OrderSuccessModal: React.FC = () => {
   const {
@@ -40,6 +41,27 @@ export const OrderSuccessModal: React.FC = () => {
         });
       } catch (e) {
         // ignore if canvas not supported
+      }
+
+      // Meta Pixel: Track Purchase event with catalog content_ids
+      try {
+        const contentIds = (order.items || []).map((item) =>
+          mapProductToCatalogSku(item.productId, undefined, item.quantity)
+        );
+        const totalValue = (order.items || []).reduce(
+          (sum, item) => sum + (item.totalPrice || item.unitPrice * item.quantity || 0),
+          0
+        );
+        trackMetaEvent('Purchase', {
+          content_ids: contentIds.length > 0 ? contentIds : ['HOA-APPLE-500ML'],
+          content_name: order.items?.[0]?.productName || 'House of Aura Luxury Order',
+          content_type: 'product',
+          currency: 'PKR',
+          value: totalValue || 2499,
+          num_items: order.items?.reduce((cnt, it) => cnt + it.quantity, 0) || 1
+        });
+      } catch (err) {
+        console.warn('[Meta Pixel] Error tracking purchase:', err);
       }
     }
   }, [order]);

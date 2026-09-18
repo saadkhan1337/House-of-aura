@@ -17,6 +17,8 @@ import {
   ShoppingBag
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { trackMetaEvent, mapProductToCatalogSku } from '../utils/metaPixel';
+import { trackTrafficEvent } from '../utils/telemetry';
 
 export const CheckoutModal: React.FC = () => {
   const {
@@ -66,6 +68,26 @@ export const CheckoutModal: React.FC = () => {
       }
     }
   }, [user, savedAddresses]);
+
+  // Meta Pixel & Internal Sentinel: Track InitiateCheckout when user opens checkout drawer/modal
+  useEffect(() => {
+    if (isCheckoutOpen && cart.length > 0) {
+      trackTrafficEvent('CHECKOUT_STARTED').catch(() => {});
+      try {
+        const contentIds = cart.map((it) => mapProductToCatalogSku(it.productId, undefined, it.quantity));
+        trackMetaEvent('InitiateCheckout', {
+          content_ids: contentIds.length > 0 ? contentIds : ['HOA-APPLE-500ML'],
+          content_name: cart[0]?.productName || 'House of Aura Bag Checkout',
+          content_type: 'product',
+          currency: 'PKR',
+          value: cartTotal || 2499,
+          num_items: cartItemCount || 1
+        });
+      } catch (err) {
+        console.warn('[Meta Pixel] InitiateCheckout error:', err);
+      }
+    }
+  }, [isCheckoutOpen]);
 
   if (!isCheckoutOpen) return null;
 
