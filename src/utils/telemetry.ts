@@ -72,7 +72,7 @@ export async function trackTrafficEvent(
     product_id: productId
   };
 
-  const endpoints = ['/api/hoa/traffic/event', 'http://localhost:8000/api/hoa/traffic/event'];
+  const endpoints = ['/api/hoa/traffic/event'];
   for (const ep of endpoints) {
     try {
       const res = await fetch(ep, {
@@ -88,7 +88,18 @@ export async function trackTrafficEvent(
 }
 
 export async function submitOrderToBackend(orderPayload: any): Promise<{ success: boolean; orderId?: string }> {
-  const endpoints = ['/api/hoa/orders', 'http://localhost:8000/api/hoa/orders'];
+  // Ensure client UUID idempotency key exists
+  if (!orderPayload.idempotency_key) {
+    try {
+      orderPayload.idempotency_key = typeof crypto !== 'undefined' && crypto.randomUUID
+        ? crypto.randomUUID()
+        : 'hoa_idem_' + Math.random().toString(36).substring(2, 11) + '_' + Date.now().toString(36);
+    } catch {
+      orderPayload.idempotency_key = 'hoa_idem_' + Date.now();
+    }
+  }
+
+  const endpoints = ['/api/hoa/orders'];
   for (const ep of endpoints) {
     try {
       const res = await fetch(ep, {
@@ -104,7 +115,7 @@ export async function submitOrderToBackend(orderPayload: any): Promise<{ success
         };
       }
     } catch (e) {
-      // Try next endpoint
+      // Public network error
     }
   }
   return { success: false };
